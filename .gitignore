@@ -1,0 +1,6 @@
+db.sqlite3
+*.pyc
+*/migrations/*
+*/__pycache__/*.pyc
+agens/__pycache__/*
+*/*/*.json
