@@ -1,0 +1,22 @@
+{% if locators %}
+<table style="width:90%">
+    <tr>
+	<td>Agent Name</td>
+	<td>Agent IP</td>
+	<td>Agent Location</td>
+	<td>Agent Coords</td>
+	<td>Agent URL</td>
+    </tr>
+    {% for item in locators %}
+    <tr>
+	<td> {{ item.name }} </td>
+	<td> {{ item.ip }} </td>
+	<td> {{ item.location }} </td>
+	<td> {{ item.latitude }},{{ item.longitude }} </td>
+	<td><a href="http://{{ item.ip }}/locator/"> Clients connecting to {{ item.name }} </a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No locators initialized. Please run /init/ to initialize the locator agent table.</p>
+{% endif %}

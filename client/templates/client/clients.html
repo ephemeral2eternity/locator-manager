@@ -1,0 +1,31 @@
+{% if method %}
+<h1>Connected clients according to {{ method }} !</h1>
+{% endif %}
+{% if clients %}
+<table style="width:100%">
+    <tr>
+          <td>Client Name</td>
+          <td>Client IP</td>
+          <td>Locator connected to</td>
+          <td>Client Location</td>
+          <td>Client Geo-Coordinates</td>
+          <td>Client ISP</td>
+          <td>Client AS</td>
+          <td>Latest Update</td>
+    </tr>
+    {% for client in clients %}
+    <tr>
+        <td>{{ client.client }}</td>
+        <td>{{ client.ip }}</td>
+        <td>{{ client.locator }}</td>
+        <td>{{ client.city }}, {{ client.region }}, {{ client.country }}</td>
+        <td>{{ client.latitude }}, {{ client.longitude }} </td>
+        <td>{{ client.ISP }}</td>
+        <td>{{ client.AS }}</td>
+        <td>{{ client.latest_update }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>There are no clients connected.</p>
+{% endif %}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+#container {
+    height: 600px;
+    min-width: 600px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.loading {
+    margin-top: 10em;
+    text-align: left;
+    color: gray;
+}
+</style>
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+{% if locators %}
+<table style="width:90%">
+    <tr>
+        <td>Agent Name</td>
+        <td>Agent IP</td>
+        <td>Agent Location</td>
+        <td>Agent Coords</td>
+        <td>Agent URL</td>
+    </tr>
+    {% for item in locators %}
+    <tr>
+        <td> {{ item.name }} </td>
+        <td> {{ item.ip }} </td>
+        <td> {{ item.location }} </td>
+        <td> {{ item.latitude }},{{ item.longitude }} </td>
+        <td><a href="http://{{ item.ip }}/locator/"> Clients connecting to {{ item.name }} </a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No locators initialized. Please run /init/ to initialize the locator agent table.</p>
+{% endif %}
+<div id="container"></div>
+<script type="text/javascript">
+$(function () {
+
+ // Initiate the chart
+ // $.getJSON('http://40.122.166.121/getJsonData/', function(jsondata) {
+ $.getJSON('/getJsonData/', function(jsondata) {
+    data = jsondata.data
+    // console.log(data);
+    $('#container').highcharts('Map', {
+
+        title: {
+            text: 'Locations of All anomaly Locators'
+        },
+
+        mapNavigation: {
+            enabled: true
+        },
+
+        tooltip: {
+            headerFormat: '',
+            pointFormat: '<b>{point.name}</b><br>IP: {point.ip}<br>Lat: {point.lat}, Lon: {point.lon}'
+        },
+
+        series: [{
+            // Use the gb-all map with no data as a basemap
+            mapData: Highcharts.maps['custom/world'],
+            name: 'Basemap',
+            borderColor: '#A0A0A0',
+            nullColor: 'rgba(200, 200, 200, 0.3)',
+            showInLegend: false
+        }, {
+            // Specify points using lat/lon
+            type: 'mappoint',
+            name: 'Locator Agents',
+            color: Highcharts.getOptions().colors[1],
+            data: data,
+            dataLabels: {
+                 align: "center",
+                 allowOverlap: true,
+                 reserveSpace: true
+            }
+        }]
+    });
+ });
+});
+</script>
