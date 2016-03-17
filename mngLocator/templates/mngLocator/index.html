@@ -26,7 +26,8 @@
         <td>Agent IP</td>
         <td>Agent Location</td>
         <td>Agent Coords</td>
-        <td>Agent URL</td>
+        <td>Clients per Agent</td>
+        <td>Agent Page</td>
     </tr>
     {% for item in locators %}
     <tr>
@@ -34,7 +35,8 @@
         <td> {{ item.ip }} </td>
         <td> {{ item.location }} </td>
         <td> {{ item.latitude }},{{ item.longitude }} </td>
-        <td><a href="http://{{ item.ip }}/locator/"> Clients connecting to {{ item.name }} </a></td>
+        <td><a href="/client/getGraph?locator={{ item.name }}&method=geo"> Geo-Connected Clients </a>, <a href="/client/getGraph?locator={{ item.name }}&method=net"> Net-connected Clients </a></td>
+        <td><a href="http://{{ item.ip }}/locator/">Recent Visited</a></td>
     </tr>
     {% endfor %}
 </table>

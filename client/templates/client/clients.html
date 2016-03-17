@@ -1,5 +1,5 @@
-{% if method %}
-<h1>Connected clients according to {{ method }} !</h1>
+{% if method and locator %}
+<h1>Connected clients on locator {{ locator }} according to {{ method }} !</h1>
 {% endif %}
 {% if clients %}
 <table style="width:100%">

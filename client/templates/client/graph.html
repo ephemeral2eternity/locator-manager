@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+#container {
+    height: 600px;
+    min-width: 600px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.loading {
+    margin-top: 10em;
+    text-align: left;
+    color: gray;
+}
+</style>
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+{% if locator and method %}
+<div id="container"></div>
+<p><a href="/">Return</a></p>
+{% else %}
+    <p>No locator and method denoted.</p>
+{% endif %}
+<script type="text/javascript">
+$(function() {
+  var locator_name = "{{ locator }}"
+  var method_name = "{{ method }}"
+  // Initiate the chart
+  var url = "/client/getJson?locator=" + locator_name + "&method=" + method_name
+  $.getJSON(url, function(jsondata) {
+    clients = jsondata.clients
+    locator = jsondata.locator
+    
+    console.log(clients)
+    
+    tmpSeries = []
+    for(var i = 0; i < clients.length; i++) {
+      var client = clients[i];
+      console.log(client.name);
+      console.log(client.ip);
+      cur_data = [locator, client]
+      cur_series_point = {        // Specify points using lat/lon
+        type: 'mappoint',
+        id: 'connected-points',
+        name: 'Connection',
+        cursor: 'move',
+        color: Highcharts.getOptions().colors[0],
+        lineWidth: 2,
+        showInLegend: false,
+        data: cur_data
+      }
+      tmpSeries.push(cur_series_point)
+		}
+    console.log(tmpSeries)
+    
+      // console.log(data);
+    $('#container').highcharts('Map', {
+
+      title: {
+        text: 'Clients connecting to ' + locator_name + " according to " + method_name + " distance"
+      },
+
+      mapNavigation: {
+        enabled: true
+      },
+
+      tooltip: {
+        headerFormat: '',
+        pointFormat: '<b>{point.name}</b><br>{point.ip}<br>Lat: {point.lat}, Lon: {point.lon}'
+      },
+
+      series: [
+      {
+        // Use the gb-all map with no data as a basemap
+        mapData: Highcharts.maps['custom/world'],
+        name: 'Basemap',
+        borderColor: '#A0A0A0',
+        nullColor: 'rgba(200, 200, 200, 0.3)',
+        showInLegend: false
+      }, 
+      {
+        // Specify points using lat/lon
+        type: 'mappoint',
+        name: 'Locator Agents',
+        color: Highcharts.getOptions().colors[1],
+        data: [locator],
+        dataLabels: {
+          align: "center",
+          allowOverlap: true,
+          reserveSpace: true,
+        }
+      }].concat(tmpSeries)
+    });
+  });
+});
+</script>
