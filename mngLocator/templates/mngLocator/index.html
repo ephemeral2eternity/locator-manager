@@ -27,7 +27,9 @@
         <td>Agent Location</td>
         <td>Agent Coords</td>
         <td>Clients per Agent</td>
-        <td>Agent Page</td>
+        <td>Agent Topology</td>
+        <td>Anomaly Stats</td>
+        <td>Anomaly Details</td>
     </tr>
     {% for item in locators %}
     <tr>
@@ -36,7 +38,9 @@
         <td> {{ item.location }} </td>
         <td> {{ item.latitude }},{{ item.longitude }} </td>
         <td><a href="/client/getGraph?locator={{ item.name }}&method=geo"> Geo-Connected Clients </a>, <a href="/client/getGraph?locator={{ item.name }}&method=net"> Net-connected Clients </a></td>
-        <td><a href="http://{{ item.ip }}/locator/">Recent Visited</a></td>
+        <td><a href="http://{{ item.ip }}/locator/graph/">Monitored Topology</a></td>
+        <td><a href="http://{{ item.ip }}/locator/statGraph">Types of Anomalies</a></td>
+        <td><a href="http://{{ item.ip }}/locator/anomalies">List of Anomalies</a></td>
     </tr>
     {% endfor %}
 </table>
@@ -50,7 +54,8 @@ $(function () {
  // Initiate the chart
  // $.getJSON('http://40.122.166.121/getJsonData/', function(jsondata) {
  $.getJSON('/getJsonData/', function(jsondata) {
-    data = jsondata.data
+    var locators = jsondata.locator;
+    var caches = jsondata.cache;
     // console.log(data);
     $('#container').highcharts('Map', {
 
@@ -79,7 +84,18 @@ $(function () {
             type: 'mappoint',
             name: 'Locator Agents',
             color: Highcharts.getOptions().colors[1],
-            data: data,
+            data: locators,
+            dataLabels: {
+                 align: "center",
+                 allowOverlap: true,
+                 reserveSpace: true
+            }
+        }, {
+            // Specify points using lat/lon
+            type: 'mappoint',
+            name: 'Cache Servers',
+            color: Highcharts.getOptions().colors[2],
+            data: caches,
             dataLabels: {
                  align: "center",
                  allowOverlap: true,

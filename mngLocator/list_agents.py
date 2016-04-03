@@ -44,5 +44,5 @@ def list_agents(rg_name, prefix):
     return locators
 
 if __name__ == '__main__':
-    locators = list_agents("agens", "locator-")
+    locators = list_agents("cache", "cache-")
     print(locators)

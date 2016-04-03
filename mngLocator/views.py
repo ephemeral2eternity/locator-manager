@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from .models import Locator
+from .models import Locator, Cache
 from .list_agents import *
 
 # Create your views here.
@@ -14,14 +14,26 @@ def index(request):
 	return HttpResponse(template.render({'locators':locators}, request))
 #	return render_to_response("mngLocator/index.html")
 
-def initLocators(request):
+def init(request):
 	Locator.objects.all().delete()
 	locators = list_agents("agens", "locator-")
 	for locator in locators:
 		new_locator = Locator(name=locator['name'], ip=locator['ip'], location=locator['location'], latitude=locator['latitude'], longitude=locator['longitude'])
 		new_locator.save()
 
-	return viewLocators(request)
+	Cache.objects.all().delete()
+	caches = list_agents("cache", "cache-")
+	for cache in caches:
+		new_cache = Cache(name=cache['name'], ip=cache['ip'], location=cache['location'], latitude=cache['latitude'], longitude=cache['longitude'])
+		new_cache.save()
+
+	return view(request)
+
+def view(request):
+	locators = Locator.objects.all()
+	caches = Cache.objects.all()
+	template = loader.get_template('mngLocator/all.html')
+	return HttpResponse(template.render({'locators':locators, 'caches':caches}, request))
 
 def viewLocators(request):
 	locators = Locator.objects.all()
@@ -29,13 +41,21 @@ def viewLocators(request):
 	return HttpResponse(template.render({'locators':locators}, request))
 
 def getJsonData(request):
+	data = {}
 	locators = Locator.objects.all()
 	locator_geo_json = []
 	for locator in locators:
 		cur_agent = {'name' : locator.name, 'lat' : locator.latitude, 'lon' : locator.longitude, 'ip' : locator.ip}
 		locator_geo_json.append(cur_agent)
-	data = {}
-	data['data'] = locator_geo_json
+	data['locator'] = locator_geo_json
+
+	caches = Cache.objects.all()
+	cache_geo_json = []
+	for cache in caches:
+		cur_cache = {'name' : cache.name, 'lat' : cache.latitude, 'lon' : cache.longitude, 'ip' : cache.ip}
+		cache_geo_json.append(cur_cache)
+	data['cache'] = cache_geo_json
+
 	rsp = JsonResponse(data, safe=False)
 	rsp["Access-Control-Allow-Origin"] = "*"
 	return rsp

@@ -1,0 +1,75 @@
+<style>
+header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px; 
+}
+section {
+    width:350px;
+    float:left;
+    padding:10px; 
+}
+footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+</style>
+<body>
+<div id="header">
+<h1>All locator agents and cache servers.</h1>
+</div>
+<div id="section">
+<h2>ALL Locator Agents Details</h2>
+{% if locators %}
+<table style="width:90%">
+    <tr>
+	<td>Agent Name</td>
+	<td>Agent IP</td>
+	<td>Agent Location</td>
+	<td>Agent Coords</td>
+	<td>Agent URL</td>
+    </tr>
+    {% for item in locators %}
+    <tr>
+	<td> {{ item.name }} </td>
+	<td> {{ item.ip }} </td>
+	<td> {{ item.location }} </td>
+	<td> {{ item.latitude }},{{ item.longitude }} </td>
+	<td><a href="http://{{ item.ip }}/locator/"> Clients connecting to {{ item.name }} </a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No locators initialized. Please run /init/ to initialize the locator agent table.</p>
+{% endif %}
+</div>
+<div id="section">
+<h2>ALL Cache Server Details</h2>
+{% if caches %}
+<table style="width:90%">
+    <tr>
+	<td>Cache Server Name</td>
+	<td>Cache Server IP</td>
+	<td>Cache Server Location</td>
+	<td>Cache Server Coords</td>
+	<td>Cache Server Main Page</td>
+    </tr>
+    {% for item in caches %}
+    <tr>
+	<td> {{ item.name }} </td>
+	<td> {{ item.ip }} </td>
+	<td> {{ item.location }} </td>
+	<td> {{ item.latitude }},{{ item.longitude }} </td>
+	<td><a href="http://{{ item.ip }}/">Demo page on {{ item.name }} </a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No cache server initialized. Please run /init/ to initialize the locator agent table and cache server table.</p>
+{% endif %}
+</div>
+</body>
