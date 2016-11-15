@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.db import transaction
 from django.template import RequestContext, loader
 from nodeinfo.models import Node, Edge
 import urllib
@@ -8,6 +9,7 @@ import json
 
 # Create your views here.
 @csrf_exempt
+@transaction.atomic
 def addRouteInfo(request):
     if request.method == "POST":
         client_info = json.loads(request.body.decode("utf-8"))
@@ -51,6 +53,7 @@ def addRouteInfo(request):
         return HttpResponse("Please use POST method for http://manage.cmu-agens.com/nodeinfo/add_route_info request!")
 
 @csrf_exempt
+@transaction.atomic
 def editNode(request):
     url = request.get_full_path()
     params = url.split('?')[1]
