@@ -1,0 +1,22 @@
+{% if edges %}
+<table style="width:100%">
+    <tr>
+	<td>Source</td>
+	<td>Source IP</td>
+	<td>Destination</td>
+	<td>Destination IP</td>
+	<td>Latest Update</td>
+    </tr>
+    {% for edge in edges %}
+    <tr>
+        <td> {{ edge.src.name }} </td> 
+	<td> {{ edge.src.ip }} </td> 
+	<td> {{ edge.dst.name }} </td> 
+	<td> {{ edge.dst.ip }} </td> 
+	<td> {{ edge.latest_check }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No route edges cached.</p>
+{% endif %}

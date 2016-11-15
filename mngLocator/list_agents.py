@@ -1,6 +1,8 @@
 from azure.common.credentials import UserPassCredentials
-from azure.mgmt.compute import ComputeManagementClient, ComputeManagementClientConfiguration
-from azure.mgmt.network import NetworkManagementClient, NetworkManagementClientConfiguration
+from azure.mgmt.compute import ComputeManagementClient
+#ComputeManagementClientConfiguration
+from azure.mgmt.network import NetworkManagementClient
+#NetworkManagementClientConfiguration
 import json
 import os
 
@@ -14,16 +16,26 @@ def list_agents(rg_name, prefix):
         info_dict["password"],  # Your password, Woku5113
     )
 
-    compute_client = ComputeManagementClient(ComputeManagementClientConfiguration(
+    #compute_client = ComputeManagementClient(ComputeManagementClientConfiguration(
+    #        credentials,
+    #        subscription_id
+    #    )
+    #)
+
+    compute_client = ComputeManagementClient(
             credentials,
             subscription_id
-        )
     )
 
-    network_client = NetworkManagementClient(NetworkManagementClientConfiguration(
-            credentials,
-            subscription_id
-        )
+    #network_client = NetworkManagementClient(NetworkManagementClientConfiguration(
+    #        credentials,
+    #        subscription_id
+    #    )
+    #)
+
+    network_client = NetworkManagementClient(
+        credentials,
+        subscription_id
     )
 
     locators = []
@@ -44,5 +56,5 @@ def list_agents(rg_name, prefix):
     return locators
 
 if __name__ == '__main__':
-    locators = list_agents("cache", "cache-")
+    locators = list_agents("agens", "locator-")
     print(locators)

@@ -25,8 +25,7 @@ SECRET_KEY = 'awlm8wl)(%nxs$3z-vj2+*t4k89ihz6c&h!v%r5@h%7b%yiz(s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*', 'superman.andrew.cmu.edu']
 
 # Application definition
 
@@ -39,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mngLocator',
     'client',
+    'nodeinfo',
+    'verifyAgents',
 ]
 
 MIDDLEWARE_CLASSES = [

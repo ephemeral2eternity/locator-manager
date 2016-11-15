@@ -1,0 +1,32 @@
+{% if nodes %}
+<table style="width:100%">
+    <tr>
+        <td>ID (Edit)</td>
+        <td>Name</td>
+        <td>IP</td>
+        <td>Type</td>
+        <td>AS</td>
+        <td>ISP</td>
+        <td>Location</td>
+        <td>City</td>
+        <td>Region</td>
+        <td>Country</td>
+    </tr>
+    {% for node in nodes %}
+    <tr>
+        <td><a href="/nodeinfo/edit_node?id={{ node.id }}">{{ node.id }}</a></td>
+        <td> {{ node.name }} </td>
+        <td> {{ node.ip }} </td>
+        <td> {{ node.nodeType }} </td>
+        <td> {{ node.AS }} </td>
+        <td> {{ node.ISP }} </td>
+        <td> ({{ node.latitude }}, {{ node.longitude }}) </td>
+        <td> {{ node.city }} </td>
+        <td> {{ node.region }} </td>
+        <td> {{ node.country }} </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No nodes have been added in the Node Table.</p>
+{% endif %}

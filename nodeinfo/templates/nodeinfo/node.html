@@ -1,0 +1,16 @@
+{% if node %}
+    <ul>
+        <li>Node ID: {{ node.id }}</li>
+        <li>node Type: {{ node.type }}</li>
+        <li>Node IP: {{ node.ip }}</li>
+        <li>Node ISP: {{ node.ISP }}</li>
+        <li>Node AS: {{ node.AS }}</li>
+        <li>Node location: ({{ node.latitude }}, {{ node.longitude }})</li>
+        <li>Node City: {{ node.city }}</li>
+        <li>Node City: {{ node.region }}</li>
+        <li>Node City: {{ node.country }}</li>
+    </ul>
+{% else %}
+    <p>No node is with id {{ node.id }}.</p>
+{% endif %}
+<a href="/nodeinfo/show_nodes">Return</a>

@@ -1,0 +1,26 @@
+{% if node %}
+    <ul>
+        <li>Node ID: {{ node.id }}</li>
+        <li>node Type: {{ node.type }}</li>
+        <li>Node IP: {{ node.ip }}</li>
+    </ul>
+    <form action="/nodeinfo/edit_node?id={{ node.id }}" method="post">
+        <label for="isp">ISP Name:</label>
+        <input id="isp" type="text" name="isp" value="{{ node.ISP }}"> <br>
+        <label for="asn">AS #:</label>
+        <input id="asn" type="number" name="asn" value="{{ node.AS }}"> <br>
+        <label for="latitude">Latitude:</label>
+        <input id="latitude" type="number" name="latitude" value="{{ node.latitude }}"> <br>
+        <label for="longitude">Longitude:</label>
+        <input id="longitude" type="number" name="longitude" value="{{ node.longitude }}"> <br>
+        <label for="city">City:</label>
+        <input id="city" type="text" name="city" value="{{ node.city }}"> <br>
+        <label for="region">Region:</label>
+        <input id="region" type="text" name="region" value="{{ node.region }}"> <br>
+        <label for="country">Country:</label>
+        <input id="country" type="text" name="country" value="{{ node.country }}"> <br>
+        <input type="submit" value="Submit">
+    </form>
+{% else %}
+    <p>No node is with id {{ node.id }}.</p>
+{% endif %}
