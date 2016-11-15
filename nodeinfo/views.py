@@ -13,7 +13,7 @@ import json
 def addRouteInfo(request):
     if request.method == "POST":
         client_info = json.loads(request.body.decode("utf-8"))
-        print(client_info)
+        # print(client_info)
         try:
             client_node = Node.objects.get(ip=client_info['ip'])
         except:
