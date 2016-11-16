@@ -6,4 +6,5 @@ urlpatterns = [
 	url(r'^show_nodes', views.showNodes, name='show_nodes'),
 	url(r'^show_edges', views.showEdges, name='show_edges'),
 	url(r'^edit_node', views.editNode, name='edit_node'),
+    url(r'get_node', views.getNode, name='get_node'),
 ]

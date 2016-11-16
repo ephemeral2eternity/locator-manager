@@ -16,6 +16,12 @@ def addRouteInfo(request):
         # print(client_info)
         try:
             client_node = Node.objects.get(ip=client_info['ip'])
+            if client_node.city == "":
+                client_node.city = client_info['city']
+            if client_node.region == "":
+                client_node.region = client_info['region']
+            if client_node.country == "":
+                client_node.country = client_info['country']
         except:
             client_node = Node(name=client_info['name'], ip=client_info['ip'], type="client",
                            city=client_info['city'], region=client_info['region'], country=client_info['country'],
@@ -33,6 +39,12 @@ def addRouteInfo(request):
                     node_type = "router"
                 try:
                     cur_node = Node.objects.get(ip=node_ip)
+                    if cur_node.city == "":
+                        cur_node.city = node['city']
+                    if cur_node.region == "":
+                        cur_node.region = node['region']
+                    if cur_node.country == "":
+                        cur_node.country = node['country']
                 except:
                     cur_node = Node(name=node['name'], ip=node_ip, type=node_type,
                            city=node['city'], region=node['region'], country=node['country'],
@@ -79,6 +91,32 @@ def editNode(request):
             return HttpResponse(template.render({'node':node}, request))
     else:
         return HttpResponse("Wrong network id denoted!")
+
+
+# Get the json info of a node by denoting its ip
+def getNode(request):
+    url = request.get_full_path()
+    params = url.split('?')[1]
+    request_dict = urllib.parse.parse_qs(params)
+    if ('ip' in request_dict.keys()):
+        ip = request_dict['ip'][0]
+    else:
+        ip = request.META['REMOTE_ADDR']
+    node = Node.objects.get(ip=ip)
+    node_dict = {}
+    node_dict['name'] = node.name
+    node_dict['ip'] = node.ip
+    node_dict['type'] = node.type
+    node_dict['city'] = node.city
+    node_dict['region'] = node.region
+    node_dict['country'] = node.country
+    node_dict['AS'] = node.AS
+    node_dict['ISP'] = node.ISP
+    node_dict['latitude'] = node.latitude
+    node_dict['longitude'] = node.longitude
+    rsp = JsonResponse(node_dict, safe=False)
+    rsp["Access-Control-Allow-Origin"] = "*"
+    return rsp
 
 # Show detailed info of all nodes.
 def showNodes(request):

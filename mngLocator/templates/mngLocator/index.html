@@ -27,9 +27,9 @@
         <td>Agent Location</td>
         <td>Agent Coords</td>
         <td>Clients per Agent</td>
-        <td>Agent Topology</td>
-        <td>Anomaly Stats</td>
-        <td>Anomaly Details</td>
+        <td>QWatch Agent Topology</td>
+        <td>QWatch Agent</td>
+        <td>QDiag Agent</td>
     </tr>
     {% for item in locators %}
     <tr>
@@ -39,8 +39,8 @@
         <td> {{ item.latitude }},{{ item.longitude }} </td>
         <td><a href="/client/getGraph?locator={{ item.name }}&method=geo"> Geo-Connected Clients </a>, <a href="/client/getGraph?locator={{ item.name }}&method=net"> Net-connected Clients </a></td>
         <td><a href="http://{{ item.ip }}/locator/graph/">Monitored Topology</a></td>
-        <td><a href="http://{{ item.ip }}/locator/statGraph">Types of Anomalies</a></td>
-        <td><a href="http://{{ item.ip }}/locator/anomalies">List of Anomalies</a></td>
+        <td><a href="http://{{ item.ip }}/locator/">QWatch Agent</a></td>
+        <td><a href="http://{{ item.ip }}/diag/">QDiag Agent</a></td>
     </tr>
     {% endfor %}
 </table>
