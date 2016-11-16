@@ -75,7 +75,8 @@ def editNode(request):
         node = Node.objects.get(id=node_id)
         if request.method == "POST":
             node_info = request.POST.dict()
-            print(node_info)
+            # print(node_info)
+            node.name = node_info['name']
             node.ISP = node_info['isp']
             node.AS = int(node_info['asn'])
             node.latitude = float(node_info['latitude'])
