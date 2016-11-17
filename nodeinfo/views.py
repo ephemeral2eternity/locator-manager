@@ -82,7 +82,30 @@ def initNetworks(request):
 
     return showNetworks(request)
 
-
+@csrf_exempt
+@transaction.atomic
+def addNode(request):
+    if request.method == "POST":
+        node_info = json.loads(request.body.decode("utf-8"))
+        try:
+            node = Node.objects.get(ip=node_info['ip'])
+            if node.city == "":
+                node.city = node_info['city']
+            if node.region == "":
+                node.region = node_info['region']
+            if node.country == "":
+                node.country = node_info['country']
+        except:
+            node = Node(name=node_info['name'], ip=node_info['ip'], type="client",
+                           city=node_info['city'], region=node_info['region'], country=node_info['country'],
+                           AS=node_info['AS'], ISP=node_info['ISP'],
+                           latitude=node_info['latitude'], longitude=node_info['longitude'])
+        node.save()
+        template = loader.get_template('nodeinfo/edit_node.html')
+        return HttpResponse(template.render({'node': node}, request))
+    else:
+        return HttpResponse(
+            "Please use POST method for http://manage.cmu-agens.com/nodeinfo/add_node request!")
 
 
 @csrf_exempt
