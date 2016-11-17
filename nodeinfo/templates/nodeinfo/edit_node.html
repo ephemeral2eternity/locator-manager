@@ -1,10 +1,11 @@
 {% if node %}
     <ul>
         <li>Node ID: {{ node.id }}</li>
-        <li>node Type: {{ node.type }}</li>
         <li>Node IP: {{ node.ip }}</li>
     </ul>
     <form action="/nodeinfo/edit_node?id={{ node.id }}" method="post">
+        <label for="type">Node Type:</label>
+        <input id="type" type="text" name="type" value="{{ node.type }}"> <br>
         <label for="name">Node Name:</label>
         <input id="name" type="text" name="name" value="{{ node.name }}"> <br>
         <label for="isp">ISP Name:</label>

@@ -96,7 +96,7 @@ def addNode(request):
             if node.country == "":
                 node.country = node_info['country']
         except:
-            node = Node(name=node_info['name'], ip=node_info['ip'], type="client",
+            node = Node(name=node_info['name'], ip=node_info['ip'], type=node_info['type'],
                            city=node_info['city'], region=node_info['region'], country=node_info['country'],
                            AS=node_info['AS'], ISP=node_info['ISP'],
                            latitude=node_info['latitude'], longitude=node_info['longitude'])
@@ -120,6 +120,7 @@ def editNode(request):
         if request.method == "POST":
             node_info = request.POST.dict()
             # print(node_info)
+            node.type = node_info['type']
             node.name = node_info['name']
             node.ISP = node_info['isp']
             node.AS = int(node_info['asn'])
