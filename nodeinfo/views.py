@@ -118,10 +118,13 @@ def editNode(request):
 # Get the json info of a node by denoting its ip
 def getNode(request):
     url = request.get_full_path()
-    params = url.split('?')[1]
-    request_dict = urllib.parse.parse_qs(params)
-    if ('ip' in request_dict.keys()):
-        ip = request_dict['ip'][0]
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        if ('ip' in request_dict.keys()):
+            ip = request_dict['ip'][0]
+        else:
+            ip = request.META['REMOTE_ADDR']
     else:
         ip = request.META['REMOTE_ADDR']
     node = Node.objects.get(ip=ip)
