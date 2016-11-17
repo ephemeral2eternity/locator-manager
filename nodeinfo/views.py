@@ -127,21 +127,25 @@ def getNode(request):
             ip = request.META['REMOTE_ADDR']
     else:
         ip = request.META['REMOTE_ADDR']
-    node = Node.objects.get(ip=ip)
     node_dict = {}
-    node_dict['name'] = node.name
-    node_dict['ip'] = node.ip
-    node_dict['type'] = node.type
-    node_dict['city'] = node.city
-    node_dict['region'] = node.region
-    node_dict['country'] = node.country
-    node_dict['AS'] = node.AS
-    node_dict['ISP'] = node.ISP
-    node_dict['latitude'] = node.latitude
-    node_dict['longitude'] = node.longitude
+    try:
+        node = Node.objects.get(ip=ip)
+        node_dict['name'] = node.name
+        node_dict['ip'] = node.ip
+        node_dict['type'] = node.type
+        node_dict['city'] = node.city
+        node_dict['region'] = node.region
+        node_dict['country'] = node.country
+        node_dict['AS'] = node.AS
+        node_dict['ISP'] = node.ISP
+        node_dict['latitude'] = node.latitude
+        node_dict['longitude'] = node.longitude
+    except:
+        print("No node with ip = " + ip)
     rsp = JsonResponse(node_dict, safe=False)
     rsp["Access-Control-Allow-Origin"] = "*"
     return rsp
+
 
 # Show detailed info of all nodes.
 def showNodes(request):
