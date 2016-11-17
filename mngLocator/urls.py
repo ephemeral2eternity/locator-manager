@@ -6,4 +6,5 @@ urlpatterns = [
 	url(r'^init/$', views.init, name='init'),
 	url(r'^query/$', views.view, name='query'),
 	url(r'^getJsonData/$', views.getJsonData, name='getJsonData'),
+	url(r'^get_cloud_agents/$', views.getCloudAgents, name='get_cloud_agents'),
 ]

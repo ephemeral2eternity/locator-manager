@@ -54,13 +54,14 @@ $(function () {
  // Initiate the chart
  // $.getJSON('http://40.122.166.121/getJsonData/', function(jsondata) {
  $.getJSON('/getJsonData/', function(jsondata) {
-    var locators = jsondata.locator;
+    var agents = jsondata.agent;
     var caches = jsondata.cache;
+    var clients = jsondata.client;
     // console.log(data);
     $('#container').highcharts('Map', {
 
         title: {
-            text: 'Locations of All anomaly Locators'
+            text: 'Locations of Cloud Agents, Clients and Cache Servers'
         },
 
         mapNavigation: {
@@ -82,10 +83,12 @@ $(function () {
         }, {
             // Specify points using lat/lon
             type: 'mappoint',
-            name: 'Locator Agents',
+            name: 'Cloud Agents',
             color: Highcharts.getOptions().colors[1],
-            data: locators,
+            data: agents,
+            enableMouseTracking: true,
             dataLabels: {
+                 enabled: false,
                  align: "center",
                  allowOverlap: true,
                  reserveSpace: true
@@ -96,7 +99,22 @@ $(function () {
             name: 'Cache Servers',
             color: Highcharts.getOptions().colors[2],
             data: caches,
+            enableMouseTracking: true,
             dataLabels: {
+                 enabled: false,
+                 align: "center",
+                 allowOverlap: true,
+                 reserveSpace: true
+            }
+        }, {
+            // Specify points using lat/lon
+            type: 'mappoint',
+            name: 'Clients',
+            color: Highcharts.getOptions().colors[3],
+            data: clients,
+            enableMouseTracking: true,
+            dataLabels: {
+                 enabled: false,
                  align: "center",
                  allowOverlap: true,
                  reserveSpace: true

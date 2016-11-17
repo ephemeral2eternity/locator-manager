@@ -1,0 +1,21 @@
+{% if networks %}
+<table style="width:100%">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>AS</td>
+        <td>Location</td>
+        <td>City, Region, Country</td>
+    </tr>
+    {% for network in networks %}
+        <tr>
+        <td> {{ network.id }} </td>
+        <td> {{ network.name }} </td>
+        <td> {{ network.AS }} </td>
+        <td> ( {{ network.latitude }} , {{ network.longitude }} ) </td>
+        <td> ({{ network.city }}, {{ network.region }}, {{ network.country }})</td>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No networks' info are available.</p>
+{% endif %}

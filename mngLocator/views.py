@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from .models import Locator, Cache
+from client.models import GeoConnected
 from .list_agents import *
 
 # Create your views here.
@@ -47,7 +48,7 @@ def getJsonData(request):
 	for locator in locators:
 		cur_agent = {'name' : locator.name, 'lat' : locator.latitude, 'lon' : locator.longitude, 'ip' : locator.ip}
 		locator_geo_json.append(cur_agent)
-	data['locator'] = locator_geo_json
+	data['agent'] = locator_geo_json
 
 	caches = Cache.objects.all()
 	cache_geo_json = []
@@ -56,6 +57,26 @@ def getJsonData(request):
 		cache_geo_json.append(cur_cache)
 	data['cache'] = cache_geo_json
 
+	clients = GeoConnected.objects.all()
+	client_geo_json = []
+	for client in clients:
+		cur_client = {'name': client.client, 'lat': client.latitude, 'lon':client.longitude, 'ip' : client.ip}
+		client_geo_json.append(cur_client)
+	data['client'] = client_geo_json
+
 	rsp = JsonResponse(data, safe=False)
+	rsp["Access-Control-Allow-Origin"] = "*"
+	return rsp
+
+
+def getCloudAgents(request):
+	data = {}
+	locators = Locator.objects.all()
+	locator_geo_json = []
+	for locator in locators:
+		cur_agent = {'name': locator.name, 'lat': locator.latitude, 'lon': locator.longitude, 'ip': locator.ip}
+		locator_geo_json.append(cur_agent)
+
+	rsp = JsonResponse(locator_geo_json, safe=False)
 	rsp["Access-Control-Allow-Origin"] = "*"
 	return rsp

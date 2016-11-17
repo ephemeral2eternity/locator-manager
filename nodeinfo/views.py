@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db import transaction
 from django.template import RequestContext, loader
-from nodeinfo.models import Node, Edge
+from nodeinfo.models import Node, Edge, Network
 import urllib
 import json
 
@@ -63,6 +63,27 @@ def addRouteInfo(request):
         return HttpResponse("Successful!")
     else:
         return HttpResponse("Please use POST method for http://manage.cmu-agens.com/nodeinfo/add_route_info request!")
+
+def initNetworks(request):
+    if Network.objects.count() > 0:
+        Network.objects.all().delete()
+
+    nodes = Node.objects.all()
+    for node in nodes:
+        node_as = int(node.AS)
+        node_latitude = float(node.latitude)
+        node_longitude = float(node.longitude)
+        try:
+            node_network = Network.objects.get(AS=node_as, latitude=node_latitude, longitude=node_longitude)
+        except:
+            node_network = Network(AS=node_as, name=node.ISP, latitude=node_latitude, longitude=node_longitude,
+                                   city=node.city, region=node.region, country=node.country)
+        node_network.save()
+
+    return showNetworks(request)
+
+
+
 
 @csrf_exempt
 @transaction.atomic
@@ -130,3 +151,8 @@ def showEdges(request):
     edges = Edge.objects.all()
     template = loader.get_template('nodeinfo/edges.html')
     return HttpResponse(template.render({'edges': edges}, request))
+
+def showNetworks(request):
+    networks = Network.objects.all()
+    template = loader.get_template('nodeinfo/networks.html')
+    return HttpResponse(template.render({'networks':networks}, request))

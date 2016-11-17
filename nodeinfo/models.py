@@ -1,6 +1,22 @@
 from django.db import models
 
 # Create your models here.
+class Network(models.Model):
+    AS = models.IntegerField(default=-1)
+    name = models.CharField(max_length=200, default="")
+    longitude = models.DecimalField(max_digits=10, decimal_places=5, default=0.0)
+    latitude = models.DecimalField(max_digits=10, decimal_places=5, default=0.0)
+    city = models.CharField(max_length=100, default="")
+    region = models.CharField(max_length=100, default="")
+    country = models.CharField(max_length=100, default="")
+
+    def __str__(self):
+        return "Network " + str(self.id) + " AS " + str(self.AS) + " at (" + str(self.latitude) + ", " + str(self.longitude) + ")"
+
+    class Meta:
+        index_together = ["AS", "latitude", "longitude"]
+        unique_together = ("AS", "latitude", "longitude")
+
 class Node(models.Model):
     name = models.CharField(max_length=100, default="")
     ip = models.CharField(max_length=100, unique=True)
@@ -8,7 +24,7 @@ class Node(models.Model):
     city = models.CharField(max_length=100, default="")
     region = models.CharField(max_length=100, default="")
     country = models.CharField(max_length=100, default="")
-    AS = models.CharField(max_length=100, default="")
+    AS = models.IntegerField(default=-1)
     ISP = models.CharField(max_length=200, default="")
     longitude = models.DecimalField(max_digits=10, decimal_places=5, default=0.0)
     latitude = models.DecimalField(max_digits=10, decimal_places=5, default=0.0)
