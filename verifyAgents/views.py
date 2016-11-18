@@ -86,3 +86,8 @@ def showVideoSessions(request):
     sessions = Session.objects.filter(isVideoSession=True)
     template = loader.get_template('verifyAgents/sessions.html')
     return HttpResponse(template.render({'sessions': sessions, 'sessionType': "video"}, request))
+
+def showVerifySessions(request):
+    sessions = Session.objects.filter(isVideoSession=False)
+    template = loader.get_template('verifyAgents/sessions.html')
+    return HttpResponse(template.render({'sessions': sessions, 'sessionType': "verify"}, request))
