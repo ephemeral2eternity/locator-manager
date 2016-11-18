@@ -1,0 +1,8 @@
+{% if node %}
+    <ul>
+        <li>Node name: {{ node.name }}</li>
+        <li>Node ip: {{ node.ip }}</li>
+        <li>Node type: {{ node.type }}</li>
+        <li><a href="/verify/get_network?id={{ node.network_id }}">Node Network: Network {{ node.network_id }}</a></li>
+    </ul>
+{% endif %}

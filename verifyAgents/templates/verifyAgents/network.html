@@ -1,0 +1,52 @@
+{% if network %}
+    <ul>
+        <li>Network ID: {{ network.id }}</li>
+        <li>Network Name: {{ network.name }}</li>
+        <li>Network Type: {{ network.type }}</li>
+        <li>Network Location: ({{ network.latitude }}, {{ network.longitude }})</li>
+        <li>Network AS Number: {{ network.ASNumber }} </li>
+        <li>Network City: {{ network.city }} </li>
+        <li>Network Region: {{ network.region }} </li>
+        <li>Network Country: {{ network.country }} </li>
+        <br><br>
+        {% if network.nodes %}
+            <li>Nodes in this network</li>
+            <table style="width:100%" border="1">
+                <tr>
+                    <td>Node Name</td>
+                    <td>Node IP</td>
+                    <td>Node Type</td>
+                </tr>
+                {% for node in network.nodes.all %}
+                    <tr>
+                    <td> {{ node.name}} </td>
+                    <td><a href="/verify/get_node?ip={{ node.ip }}"> {{ node.ip }} </a></td>
+                    <td> {{ node.type }} </td>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <br><br>
+        {% if edges %}
+            <li>Edges in this network</li>
+            <table style="width:100%" border="1">
+                <tr>
+                    <td>Source Node Name</td>
+                    <td>Source Node IP</td>
+                    <td>Source Node Type</td>
+                    <td>Destination Node Name</td>
+                    <td>Destination Node IP</td>
+                    <td>Destination Node Type</td>
+                </tr>
+                {% for edge in edges %}
+                    <tr>
+                    <td> {{ edge.src.name}} </td>
+                    <td> {{ edge.src.ip}} </td>
+                    <td> {{ edge.src.type}} </td>
+                    <td> {{ edge.dst.name}} </td>
+                    <td> {{ edge.dst.ip}} </td>
+                    <td> {{ edge.dst.type}} </td>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </ul>
+{% endif %}

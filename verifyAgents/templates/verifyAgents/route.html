@@ -1,0 +1,31 @@
+{% if session %}
+    <h1>Show session's route info</h1>
+    <ul>
+        <li>Source node: {{ session.src_ip }}</li>
+        <li>Destination node: {{ session.dst_ip }}</li>
+        {% if session.isVideoSession %}
+            <li>Session Type: Video session to CDN</li>
+        {% else %}
+            <li>Session Type: Verification session</li>
+        {% endif %}
+    </ul>
+{% endif %}
+{% if route %}
+<table style="width:100%">
+    <tr>
+        <td>Hop ID</td>
+        <td>Node Name</td>
+        <td>Node IP</td>
+        <td>Node Type</td>
+        <td>Node Network</td>
+    </tr>
+    {% for hop in route %}
+        <tr>
+        <td> {{ hop.hopID }} </td>
+        <td> {{ hop.node.name }} </td>
+        <td> {{ hop.node.ip }} </td>
+        <td> {{ hop.node.type }} </td>
+        <td><a href="/verify/get_network?id={{ hop.node.network_id }}">Network {{ hop.node.network_id }} details</a></td>
+    {% endfor %}
+</table>
+{% endif %}

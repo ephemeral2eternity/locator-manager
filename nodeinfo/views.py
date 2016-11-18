@@ -170,7 +170,6 @@ def getNode(request):
     rsp["Access-Control-Allow-Origin"] = "*"
     return rsp
 
-
 # Show detailed info of all nodes.
 def showNodes(request):
     nodes = Node.objects.all()

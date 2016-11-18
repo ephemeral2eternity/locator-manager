@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# Node defines a node reported by a pair of verification agents or a video session
 class Node(models.Model):
     name = models.CharField(max_length=100)
     ip = models.CharField(max_length=100)
@@ -10,6 +10,17 @@ class Node(models.Model):
 
     def __str__(self):
         return self.type + ":" + self.ip
+
+# Edge records the link between two nodes
+class Edge(models.Model):
+    src = models.ForeignKey(Node, on_delete=models.CASCADE, related_name='node_source')
+    dst = models.ForeignKey(Node, on_delete=models.CASCADE, related_name='node_target')
+    latest_check = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ["src", "dst"]
+    def __str__(self):
+        return str(self.src.ip + "<-->" + self.dst.ip)
 
 # Network defines a network that several routers in an end-to-end delivery path belongs to
 class Network(models.Model):
@@ -22,6 +33,7 @@ class Network(models.Model):
     city = models.CharField(max_length=100, default="")
     region = models.CharField(max_length=100, default="")
     country = models.CharField(max_length=100, default="")
+    isVideoPath = models.BooleanField(default=False)
 
     def __str__(self):
         return "Network " + str(self.id) + " AS " + str(self.ASNumber) + " at (" + str(self.latitude) + ", " + str(self.longitude) + ")"
@@ -35,9 +47,13 @@ class Session(models.Model):
     dst_ip = models.CharField(max_length=100)
     route = models.ManyToManyField(Node, through='Hop')
     route_networks = models.ManyToManyField(Network, through='Subnetwork')
+    isVideoSession = models.BooleanField()
 
     def __str__(self):
-        return "Session: " + self.src.name + " <--> " + self.dst.name
+        if self.isVideoSession:
+            return "Video Session: " + self.src_ip + " <--> " + self.dst_ip
+        else:
+            return "Verification Session: " + self.src_ip + " <--> " + self.dst_ip
 
 # Define hop with its sequence on a client's route
 class Hop(models.Model):
@@ -51,7 +67,6 @@ class Hop(models.Model):
 class Subnetwork(models.Model):
     network = models.ForeignKey(Network, on_delete=models.CASCADE)
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
-    subnetworkID = models.PositiveIntegerField()
 
     def __str__(self):
-        return str(self.session) + "; Subnetwork #: " + str(self.subnetworkID) + "; Subnetwork name: " + self.network.name
+        return str(self.session) + "; Subnetwork name: " + self.network.name
