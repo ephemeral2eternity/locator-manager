@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="043c5e8c-6db7-4fc8-a9f8-9f216e22ef8b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/add_route.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/node.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/route.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/sessions.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locatemngm/urls.py" afterPath="$PROJECT_DIR$/locatemngm/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodeinfo/views.py" afterPath="$PROJECT_DIR$/nodeinfo/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/models.py" afterPath="$PROJECT_DIR$/verifyAgents/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/views.py" afterPath="$PROJECT_DIR$/verifyAgents/views.py" />
-    </list>
+    <list default="true" id="043c5e8c-6db7-4fc8-a9f8-9f216e22ef8b" name="Default" comment="" />
     <ignored path="mngLocator.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -342,6 +330,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="locatemngm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mngLocator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mngLocator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
