@@ -47,7 +47,7 @@ class Session(models.Model):
     dst_ip = models.CharField(max_length=100)
     route = models.ManyToManyField(Node, through='Hop')
     route_networks = models.ManyToManyField(Network, through='Subnetwork')
-    isVideoSession = models.BooleanField()
+    isVideoSession = models.BooleanField(default=False)
 
     def __str__(self):
         if self.isVideoSession:
