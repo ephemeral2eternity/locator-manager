@@ -9,6 +9,12 @@ import json
 import urllib
 
 # Create your views here.
+def flush(request):
+    Node.objects.all().delete()
+    Network.objects.all().delete()
+    Session.objects.all().delete()
+    return HttpResponse("Flush successfully for App: verifyAgents!")
+
 # Add the hops in the Client's route and get the client's route networks, server, and device info.
 @csrf_exempt
 @transaction.atomic
