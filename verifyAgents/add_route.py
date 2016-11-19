@@ -32,7 +32,10 @@ def add(client_info, isVideoPath):
                           latitude=client_info['latitude'], longitude=client_info['longitude'],
                           city=client_info['city'], region=client_info['region'], country=client_info['country'], isVideoPath=isVideoPath)
     src_net.save()
-    src_subnet = Subnetwork(session=session, network=src_net)
+    try:
+        src_subnet = Subnetwork.objects.get(session=session, network=src_net)
+    except:
+        src_subnet = Subnetwork(session=session, network=src_net)
     src_subnet.save()
 
     try:
@@ -64,8 +67,10 @@ def add(client_info, isVideoPath):
     except:
         preHop = Hop(session=session, node=src_node, hopID=hopID)
     preHop.save()
-    src_net.nodes.add(src_node)
-    src_net.save()
+
+    if src_node not in src_net.nodes.all():
+        src_net.nodes.add(src_node)
+        src_net.save()
 
     hasServer = False
 

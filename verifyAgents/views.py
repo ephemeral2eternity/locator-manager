@@ -82,6 +82,25 @@ def getRoute(request):
         return HttpResponse(
             "You should use GET request http://manager/verify/get_route?src=src_ip&dst=dst_ip to get the route info for the session (src, dst)!")
 
+def getSubnetwork(request):
+    url = request.get_full_path()
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        if ('src' in request_dict.keys()) and ('dst' in request_dict.keys()):
+            src_ip = request_dict['src'][0]
+            dst_ip = request_dict['dst'][0]
+            session = Session.objects.get(src_ip=src_ip, dst_ip=dst_ip)
+            subnetworks = Subnetwork.objects.filter(session=session)
+            template = loader.get_template('verifyAgents/subnetworks.html')
+            return HttpResponse(template.render({'session': session, 'subnetworks': subnetworks}, request))
+        else:
+            return HttpResponse(
+                "You should use GET request http://manager/verify/get_subnetworks?src=src_ip&dst=dst_ip to get the route info for the session (src, dst)!")
+    else:
+        return HttpResponse(
+        "You should use GET request http://manager/verify/get_subnetworks?src=src_ip&dst=dst_ip to get the subnetwork info for the session (src, dst)!")
+
 def showVideoSessions(request):
     sessions = Session.objects.filter(isVideoSession=True)
     template = loader.get_template('verifyAgents/sessions.html')

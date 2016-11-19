@@ -1,0 +1,33 @@
+{% if session %}
+    <h1>Show session's subnetwork info</h1>
+    <ul>
+        <li>Source node: {{ session.src_ip }}</li>
+        <li>Destination node: {{ session.dst_ip }}</li>
+        {% if session.isVideoSession %}
+            <li>Session Type: Video session to CDN</li>
+        {% else %}
+            <li>Session Type: Verification session</li>
+        {% endif %}
+    </ul>
+{% endif %}
+{% if subnetworks %}
+<table style="width:100%">
+    <tr>
+        <td>Network ID</td>
+        <td>Network Name</td>
+        <td>Network Type</td>
+        <td>Network AS Number</td>
+        <td>Network Location</td>
+        <td>Network City, Region, Country</td>
+    </tr>
+    {% for subnetwork in subnetworks %}
+        <tr>
+        <td> {{ subnetwork.network.id }} </td>
+        <td> {{ subnetwork.network.name }} </td>
+        <td> {{ subnetwork.network.type}} </td>
+        <td> {{ subnetwork.network.ASNumber }} </td>
+        <td> ({{ subnetwork.network.latitude }}, {{ subnetwork.network.longitude }})</td>
+        <td> ({{ subnetwork.network.city }}, {{ subnetwork.network.region }}, {{ subnetwork.network.country }})</td>
+    {% endfor %}
+</table>
+{% endif %}
