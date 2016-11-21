@@ -107,6 +107,26 @@ def getSubnetwork(request):
         return HttpResponse(
         "You should use GET request http://manager/verify/get_subnetworks?src=src_ip&dst=dst_ip to get the subnetwork info for the session (src, dst)!")
 
+def showVideoNetworks(request):
+    networks = Network.objects.filter(isVideoPath=True)
+    tempate = loader.get_template('verifyAgents/networks.html')
+    return HttpResponse(tempate.render({'networks':networks}, request))
+
+def showVerifyNetworks(request):
+    networks = Network.objects.filter(isVideoPath=False)
+    tempate = loader.get_template('verifyAgents/networks.html')
+    return HttpResponse(tempate.render({'networks':networks}, request))
+
+def getVerifySessionForVideoNetworks(request):
+    verifySessionForVideoNetworks = Subnetwork.objects.filter(Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
+    rst = {}
+    for subNtw in verifySessionForVideoNetworks:
+        if subNtw.network.id not in rst.keys():
+            rst[subNtw.network.id] = []
+        cur_session = {'src': subNtw.session.src_ip, 'dst': subNtw.session.dst_ip, 'len': subNtw.session.route.count()}
+        rst[subNtw.network.id].append(cur_session)
+    return JsonResponse(rst)
+
 def showVideoSessions(request):
     sessions = Session.objects.filter(isVideoSession=True)
     template = loader.get_template('verifyAgents/sessions.html')

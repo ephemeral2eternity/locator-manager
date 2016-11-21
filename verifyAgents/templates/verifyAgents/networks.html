@@ -1,0 +1,28 @@
+{% if networks %}
+    <table style="width:100%" border="1">
+        <tr>
+            <td>Network ID</td>
+            <td>Network Name</td>
+            <td>Network Type</td>
+            <td>Network Location</td>
+            <td>Network AS Number</td>
+            <td>Network City</td>
+            <td>Network Region</td>
+            <td>Network Country</td>
+        </tr>
+        {% for network in networks %}
+            <tr>
+                <td> {{ network.id}} </td>
+                <td> {{ network.name}} </td>
+                <td> {{ network.type}} </td>
+                <td> ({{ network.latitude }}, {{ network.longitude }}) </td>
+                <td> {{ network.ASNumber }} </td>
+                <td> {{ network.city }} </td>
+                <td> {{ network.region }} </td>
+                <td> {{ network.country }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No denoted networks available!</p>
+{% endif %}
