@@ -119,13 +119,11 @@ def showVerifyNetworks(request):
     return HttpResponse(tempate.render({'networks':networks}, request))
 
 def initVerifySessions(request):
+    VerifySession.objects.all().delete()
     verifySessionForVideoNetworks = Subnetwork.objects.filter(
         Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
     for subNtw in verifySessionForVideoNetworks:
-        try:
-            cur_verify_session = VerifySession.objects.get(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
-        except:
-            cur_verify_session = VerifySession(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
+        cur_verify_session = VerifySession(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
         cur_verify_session.save()
         cur_verify_session.networks.add(subNtw.network)
     return showVerifySessionsForNetworks(request)
