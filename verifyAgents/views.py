@@ -5,6 +5,7 @@ from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from .add_route import *
+from .models import VerifySession
 import json
 import urllib
 
@@ -117,14 +118,36 @@ def showVerifyNetworks(request):
     tempate = loader.get_template('verifyAgents/networks.html')
     return HttpResponse(tempate.render({'networks':networks}, request))
 
-def getVerifySessionForVideoNetworks(request):
-    verifySessionForVideoNetworks = Subnetwork.objects.filter(Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
-    rst = {}
+def initVerifySessions(request):
+    verifySessionForVideoNetworks = Subnetwork.objects.filter(
+        Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
     for subNtw in verifySessionForVideoNetworks:
-        if subNtw.network.id not in rst.keys():
-            rst[subNtw.network.id] = []
-        cur_session = {'src': subNtw.session.src_ip, 'dst': subNtw.session.dst_ip, 'len': subNtw.session.route.count()}
-        rst[subNtw.network.id].append(cur_session)
+        try:
+            cur_verify_session = VerifySession.objects.get(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
+        except:
+            cur_verify_session = VerifySession(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
+        cur_verify_session.save()
+        cur_verify_session.networks.add(subNtw.network)
+    return showVerifySessionsForNetworks(request)
+
+def showVerifySessionsForNetworks(request):
+    verify_sessions = VerifySession.objects.all()
+    template = loader.get_template('verifyAgents/verify_sessions.html')
+    return HttpResponse(template.render({'verify_sessions': verify_sessions}, request))
+
+def getVerifySessionBySrc(request):
+    src_ip = request.META['REMOTE_ADDR']
+    verify_sessions_by_src = VerifySession.objects.filter(src_ip=src_ip)
+    rst = {}
+    for session in verify_sessions_by_src:
+        if session.dst_ip not in rst.keys():
+            rst[session.dst_ip] = []
+        cur_session = {}
+        cur_session['length'] = session.length
+        cur_session['networks'] = []
+        for ntw in session.networks.all():
+            cur_session['networks'].append(ntw.id)
+        rst[session.dst_ip] = cur_session
     return JsonResponse(rst)
 
 def showVideoSessions(request):

@@ -55,6 +55,15 @@ class Session(models.Model):
         else:
             return "Verification Session: " + self.src_ip + " <--> " + self.dst_ip
 
+class VerifySession(models.Model):
+    src_ip = models.CharField(max_length=100)
+    dst_ip = models.CharField(max_length=100)
+    length = models.IntegerField()
+    networks = models.ManyToManyField(Network)
+
+    def __str__(self):
+        return "Verification Session : " + self.src_ip + "<-->" + self.dst_ip + ",".join(ntw.id for ntw in self.networks.all())
+
 # Define hop with its sequence on a client's route
 class Hop(models.Model):
     node = models.ForeignKey(Node, on_delete=models.CASCADE)

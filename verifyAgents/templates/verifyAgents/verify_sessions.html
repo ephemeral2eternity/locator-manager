@@ -1,0 +1,25 @@
+{% if verify_sessions %}
+<table style="width:100%">
+    <tr>
+        <td>ID</td>
+        <td>Src IP</td>
+        <td>Dst IP</td>
+        <td>Session Path Length</td>
+        <td>IDs of Networks to be verified</td>
+    </tr>
+    {% for session in verify_sessions %}
+        <tr>
+        <td> {{ session.id }} </td>
+        <td> {{ session.src_ip }} </td>
+        <td> {{ session.dst_ip }} </td>
+        <td> {{ session.length }} </td>
+        <td>
+            {% for network in session.networks.all %}
+                <a href="/verify/get_network?id={{ network.id }}"> {{ network.name }}</a> <br>
+            {% endfor %}
+        </td>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No verify session's info are available. Please run http://manage.cmu-agens.com/verify/init_verify_sessions first</p>
+{% endif %}
