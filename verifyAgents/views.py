@@ -161,6 +161,7 @@ def shortenNetworksForVerifySessions(request):
             cur_network.verify_sessions.clear()
             for cur_session in sorted_sessions:
                 cur_network.verify_sessions.add(cur_session)
+        cur_network.save()
     return showNetworksForVerifySessions(request)
 
 def showNetworksForVerifySessions(request):
