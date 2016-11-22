@@ -157,10 +157,12 @@ def shortenNetworksForVerifySessions(request):
     for cur_network in NetworkForVerifySession.objects.all():
         verify_sessions = cur_network.verify_sessions
         if verify_sessions.count() > K:
-            sorted_sessions = verify_sessions.all().annotate(length=Count('route')).order_by('-length')[:K]
-            cur_network.verify_sessions.clear()
+            sorted_sessions = verify_sessions.all().annotate(length=Count('route')).order_by('length')
+            i = 0
             for cur_session in sorted_sessions:
-                cur_network.verify_sessions.add(cur_session)
+                if i > K:
+                    cur_network.verify_sessions.remove(cur_session)
+                i += 1
         cur_network.save()
     return showNetworksForVerifySessions(request)
 
