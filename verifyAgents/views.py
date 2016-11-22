@@ -5,7 +5,7 @@ from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from .add_route import *
-from .models import VerifySession
+from .models import VerifySession, NetworkForVerifySession
 import json
 import urllib
 
@@ -108,6 +108,24 @@ def getSubnetwork(request):
         return HttpResponse(
         "You should use GET request http://manager/verify/get_subnetworks?src=src_ip&dst=dst_ip to get the subnetwork info for the session (src, dst)!")
 
+def getSession(request):
+    url = request.get_full_path()
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        if ('src' in request_dict.keys()) and ('dst' in request_dict.keys()):
+            src_ip = request_dict['src'][0]
+            dst_ip = request_dict['dst'][0]
+            session = Session.objects.get(src_ip=src_ip, dst_ip=dst_ip)
+            template = loader.get_template('verifyAgents/session.html')
+            return HttpResponse(template.render({'session': session}, request))
+        else:
+            return HttpResponse(
+                "You should use GET request http://manager/verify/get_session?src=src_ip&dst=dst_ip to get the session info for the session (src, dst)!")
+    else:
+        return HttpResponse(
+            "You should use GET request http://manager/verify/get_session?src=src_ip&dst=dst_ip to get the session info for the session (src, dst)!")
+
 def showVideoNetworks(request):
     networks = Network.objects.filter(isVideoPath=True)
     tempate = loader.get_template('verifyAgents/networks.html')
@@ -118,14 +136,38 @@ def showVerifyNetworks(request):
     tempate = loader.get_template('verifyAgents/networks.html')
     return HttpResponse(tempate.render({'networks':networks}, request))
 
-def initVerifySessions(request):
+def initNetworksForVerifySessions(request):
+    NetworkForVerifySession.objects.all().delete()
+    verifySessionForVideoNetworks = Subnetwork.objects.filter(
+        Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
+    for subNtw in verifySessionForVideoNetworks:
+        try:
+            curNetwork = NetworkForVerifySession.objects.get(network=subNtw.network)
+        except:
+            curNetwork = NetworkForVerifySession(network=subNtw.network)
+        curNetwork.save()
+        curNetwork.verify_sessions.add(subNtw.session)
+        curNetwork.save()
+    return showNetworksForVerifySessions(request)
+
+def showNetworksForVerifySessions(request):
+    networks_for_verify_sessions = NetworkForVerifySession.objects.all()
+    template = loader.get_template('verifyAgents/networks_for_verify_sessions.html')
+    return HttpResponse(template.render({'network_sessions': networks_for_verify_sessions}, request))
+
+def initVerifySessionsForNetwork(request):
     VerifySession.objects.all().delete()
     verifySessionForVideoNetworks = Subnetwork.objects.filter(
         Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
     for subNtw in verifySessionForVideoNetworks:
-        cur_verify_session = VerifySession(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
+        try:
+            cur_verify_session = VerifySession.objects.get(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
+        except:
+            cur_verify_session = VerifySession(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip,
+                                                           length=subNtw.session.route.count())
         cur_verify_session.save()
         cur_verify_session.networks.add(subNtw.network)
+        cur_verify_session.save()
     return showVerifySessionsForNetworks(request)
 
 def showVerifySessionsForNetworks(request):

@@ -1,0 +1,30 @@
+{% if network_sessions %}
+    <table style="width:100%" border="1">
+        <tr>
+            <td>Network ID</td>
+            <td>Network Name</td>
+            <td>Network Type</td>
+            <td>Network Location</td>
+            <td>Network AS Number</td>
+            <td>Network City, Region, Country</td>
+            <td>Sessions to verify the Network </td>
+        </tr>
+        {% for network_session in network_sessions %}
+            <tr>
+                <td> <a href="/verify/get_network?id={{ network_session.network.id}}"> {{ network_session.network.id}} </a></td>
+                <td> {{ network_session.network.name}} </td>
+                <td> {{ network_session.network.type}} </td>
+                <td> ({{ network_session.network.latitude }}, {{ network_session.network.longitude }}) </td>
+                <td> {{ network_session.network.ASNumber }} </td>
+                <td> {{ network_session.network.city }} {{ network_session.network.region }}, {{ network_session.network.country }}</td>
+                <td>
+                    {% for session in network_session.verify_sessions.all %}
+                        <a href="/verify/get_session?src={{ session.src_ip }}&dst={{ session.dst_ip }}">{{ session }}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No denoted networks available!</p>
+{% endif %}

@@ -1,0 +1,9 @@
+{% if session %}
+<ul>
+    <li>Session: {{ session.src_ip }} <---> {{ session.dst_ip }}</li>
+    <li><a href="/verify/get_route?src={{ session.src_ip }}&dst={{ session.dst_ip }}">Route Details</a></li>
+    <li><a href="/verify/get_subnetworks?src={{ session.src_ip }}&dst={{ session.dst_ip }}">Sub-networks' details</a></li>
+</ul>
+{% else %}
+    <p>No session by denoted source and destination ips.</p>
+{% endif %}
