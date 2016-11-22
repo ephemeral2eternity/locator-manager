@@ -18,9 +18,11 @@
                 <td> {{ network_session.network.ASNumber }} </td>
                 <td> {{ network_session.network.city }} {{ network_session.network.region }}, {{ network_session.network.country }}</td>
                 <td>
+                    <ul>
                     {% for session in network_session.verify_sessions.all %}
-                        <a href="/verify/get_session?src={{ session.src_ip }}&dst={{ session.dst_ip }}">{{ session }}</a>
+                        <li><a href="/verify/get_session?src={{ session.src_ip }}&dst={{ session.dst_ip }}">{{ session }}</a></li>
                     {% endfor %}
+                    </ul>
                 </td>
             </tr>
         {% endfor %}

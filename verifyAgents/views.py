@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db import transaction
 from django.http import HttpResponse, JsonResponse
-from django.db.models import Q
+from django.db.models import Q, Count
 from .add_route import *
 from .models import VerifySession, NetworkForVerifySession
 import json
@@ -140,6 +140,8 @@ def initNetworksForVerifySessions(request):
     NetworkForVerifySession.objects.all().delete()
     verifySessionForVideoNetworks = Subnetwork.objects.filter(
         Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
+
+    ## Assign each verify session to a unique network
     for subNtw in verifySessionForVideoNetworks:
         try:
             curNetwork = NetworkForVerifySession.objects.get(network=subNtw.network)
@@ -150,6 +152,17 @@ def initNetworksForVerifySessions(request):
         curNetwork.save()
     return showNetworksForVerifySessions(request)
 
+def shortenNetworksForVerifySessions(request):
+    K = 3
+    for cur_network in NetworkForVerifySession.objects.all():
+        verify_sessions = cur_network.verify_sessions
+        if verify_sessions.count() > K:
+            sorted_sessions = verify_sessions.all().annotate(length=Count('route')).order_by('-length')[:K]
+            cur_network.verify_sessions.clear()
+            for cur_session in sorted_sessions:
+                cur_network.verify_sessions.add(cur_session)
+    return showNetworksForVerifySessions(request)
+
 def showNetworksForVerifySessions(request):
     networks_for_verify_sessions = NetworkForVerifySession.objects.all()
     template = loader.get_template('verifyAgents/networks_for_verify_sessions.html')
@@ -157,17 +170,15 @@ def showNetworksForVerifySessions(request):
 
 def initVerifySessionsForNetwork(request):
     VerifySession.objects.all().delete()
-    verifySessionForVideoNetworks = Subnetwork.objects.filter(
-        Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
-    for subNtw in verifySessionForVideoNetworks:
-        try:
-            cur_verify_session = VerifySession.objects.get(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip, length=subNtw.session.route.count())
-        except:
-            cur_verify_session = VerifySession(src_ip=subNtw.session.src_ip, dst_ip=subNtw.session.dst_ip,
-                                                           length=subNtw.session.route.count())
-        cur_verify_session.save()
-        cur_verify_session.networks.add(subNtw.network)
-        cur_verify_session.save()
+    for subNtw in NetworkForVerifySession.objects.all():
+        for session in subNtw.verify_sessions.all():
+            try:
+                cur_verify_session = VerifySession.objects.get(src_ip=session.src_ip, dst_ip=session.dst_ip, length=session.route.count())
+            except:
+                cur_verify_session = VerifySession(src_ip=session.src_ip, dst_ip=session.dst_ip, length=session.route.count())
+            cur_verify_session.save()
+            cur_verify_session.networks.add(subNtw.network)
+            cur_verify_session.save()
     return showVerifySessionsForNetworks(request)
 
 def showVerifySessionsForNetworks(request):

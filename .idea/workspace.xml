@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="043c5e8c-6db7-4fc8-a9f8-9f216e22ef8b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks_for_verify_sessions.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/session.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/models.py" afterPath="$PROJECT_DIR$/verifyAgents/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/sessions.html" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/sessions.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks_for_verify_sessions.html" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks_for_verify_sessions.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/urls.py" afterPath="$PROJECT_DIR$/verifyAgents/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/views.py" afterPath="$PROJECT_DIR$/verifyAgents/views.py" />
     </list>
@@ -36,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/verifyAgents/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="110" column="14" selection-start-line="110" selection-start-column="4" selection-end-line="110" selection-end-column="14" />
+            <state relative-caret-position="198">
+              <caret line="173" column="51" selection-start-line="173" selection-start-column="51" selection-end-line="173" selection-end-column="51" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -51,18 +48,18 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/verifyAgents/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+            <state relative-caret-position="103">
+              <caret line="47" column="55" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="networks_for_verify_sessions.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="networks_for_verify_sessions.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks_for_verify_sessions.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+            <state relative-caret-position="164">
+              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
               <folding>
                 <element signature="e#37#55#0#HTML" expanded="true" />
               </folding>
@@ -73,8 +70,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/verifyAgents/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="60" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
+            <state relative-caret-position="119">
+              <caret line="10" column="85" selection-start-line="10" selection-start-column="85" selection-end-line="10" selection-end-column="85" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -119,12 +116,12 @@
         <option value="$PROJECT_DIR$/verifyAgents/add_route.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/verify_sessions.html" />
-        <option value="$PROJECT_DIR$/verifyAgents/models.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/sessions.html" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/session.html" />
-        <option value="$PROJECT_DIR$/verifyAgents/views.py" />
-        <option value="$PROJECT_DIR$/verifyAgents/urls.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks_for_verify_sessions.html" />
+        <option value="$PROJECT_DIR$/verifyAgents/urls.py" />
+        <option value="$PROJECT_DIR$/verifyAgents/models.py" />
+        <option value="$PROJECT_DIR$/verifyAgents/views.py" />
       </list>
     </option>
   </component>
@@ -635,10 +632,10 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20474967" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20474967" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962447" sideWeight="0.5025674" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -696,13 +693,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/verifyAgents/views.py</url>
-          <line>173</line>
+          <line>184</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/verifyAgents/views.py</url>
-          <line>159</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="8" />
@@ -906,6 +898,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1046,10 +1039,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks_for_verify_sessions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="e#37#55#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="60" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
+        <state relative-caret-position="119">
+          <caret line="10" column="85" selection-start-line="10" selection-start-column="85" selection-end-line="10" selection-end-column="85" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -1058,28 +1061,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+        <state relative-caret-position="103">
+          <caret line="47" column="55" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="110" column="14" selection-start-line="110" selection-start-column="4" selection-end-line="110" selection-end-column="14" />
+        <state relative-caret-position="198">
+          <caret line="173" column="51" selection-start-line="173" selection-start-column="51" selection-end-line="173" selection-end-column="51" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks_for_verify_sessions.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <folding>
-            <element signature="e#37#55#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
