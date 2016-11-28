@@ -204,6 +204,15 @@ def getVerifySessionBySrc(request):
         rst[session.dst_ip] = cur_session
     return JsonResponse(rst)
 
+def getPeerAgents(request):
+    src_ip = request.META['REMOTE_ADDR']
+    verify_sessions_by_src = VerifySession.objects.filter(src_ip=src_ip)
+    rst = []
+    for session in verify_sessions_by_src:
+        if session.dst_ip not in rst:
+            rst.append(session.dst_ip)
+    return HttpResponse(",".join(rst))
+
 def showVideoSessions(request):
     sessions = Session.objects.filter(isVideoSession=True)
     template = loader.get_template('verifyAgents/sessions.html')
