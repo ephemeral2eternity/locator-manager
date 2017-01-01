@@ -153,7 +153,7 @@ def getVerifySessionsPerNetwork(request):
         request_dict = urllib.parse.parse_qs(params)
         if ('id' in request_dict.keys()):
             network_id = request_dict['id'][0]
-            verify_sessions = VerifySession.objects.filter(networks_id=network_id)
+            verify_sessions = VerifySession.objects.filter(networks__id=network_id)
             template = loader.get_template('verifyAgents/sessions.html')
             return HttpResponse(template.render({'network_id': network_id, 'sessions': verify_sessions, 'sessionType': "verify"}, request))
         else:
