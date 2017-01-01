@@ -131,6 +131,36 @@ def showVideoNetworks(request):
     tempate = loader.get_template('verifyAgents/networks.html')
     return HttpResponse(tempate.render({'networks':networks}, request))
 
+def getVideoSessionsPerNetwork(request):
+    url = request.get_full_path()
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        if ('id' in request_dict.keys()):
+            network_id = request_dict['id'][0]
+            video_sessions = Session.objects.filter(route_networks__id=network_id, isVideoSession=True)
+            template = loader.get_template('verifyAgents/sessions.html')
+            return HttpResponse(template.render({'network_id': network_id, 'sessions': video_sessions, 'sessionType': "video"}, request))
+        else:
+            return HttpResponse("Please give the network id !")
+    else:
+        return HttpResponse("Please use the request : http://manage.cmu-agens.com/verify/get_video_session_per_network?id=network_id")
+
+def getVerifySessionsPerNetwork(request):
+    url = request.get_full_path()
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        if ('id' in request_dict.keys()):
+            network_id = request_dict['id'][0]
+            verify_sessions = VerifySession.objects.filter(networks_id=network_id)
+            template = loader.get_template('verifyAgents/sessions.html')
+            return HttpResponse(template.render({'network_id': network_id, 'sessions': verify_sessions, 'sessionType': "verify"}, request))
+        else:
+            return HttpResponse("Please give the network id !")
+    else:
+        return HttpResponse("Please use the request : http://manage.cmu-agens.com/verify/get_verify_session_per_network?id=network_id")
+
 def showVerifyNetworks(request):
     networks = Network.objects.filter(isVideoPath=False)
     tempate = loader.get_template('verifyAgents/networks.html')

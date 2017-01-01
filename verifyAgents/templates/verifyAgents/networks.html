@@ -9,6 +9,8 @@
             <td>Network City</td>
             <td>Network Region</td>
             <td>Network Country</td>
+            <td>Video sessions</td>
+            <td>Verify sessions</td>
         </tr>
         {% for network in networks %}
             <tr>
@@ -20,6 +22,8 @@
                 <td> {{ network.city }} </td>
                 <td> {{ network.region }} </td>
                 <td> {{ network.country }} </td>
+                <td><a href="/verify/get_video_session_per_network?id={{ network.id }}">Video Sessions</a></td>
+                <td><a href="/verify/get_verify_session_per_network?id={{ network.id }}">Verify Sessions</a></td>
             </tr>
         {% endfor %}
     </table>
