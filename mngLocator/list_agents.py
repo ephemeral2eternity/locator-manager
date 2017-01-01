@@ -1,14 +1,16 @@
 from azure.common.credentials import UserPassCredentials
 from azure.mgmt.compute import ComputeManagementClient
-#ComputeManagementClientConfiguration
+# from azure.mgmt.compute import ComputeManagementClient, ComputeManagementClientConfiguration
 from azure.mgmt.network import NetworkManagementClient
-#NetworkManagementClientConfiguration
+# from azure.mgmt.network import NetworkManagementClient, NetworkManagementClientConfiguration
 import json
 import os
 
 def list_agents(rg_name, prefix):
     info_dict = json.load(open(os.path.dirname(__file__) + "/info.json"))
     location_dict = json.load(open(os.path.dirname(__file__) + "/locations.json"))
+    # info_dict = json.load(open(os.getcwd() + "/info.json"))
+    # location_dict = json.load(open(os.getcwd() + "/locations.json"))
     subscription_id = info_dict["subscription_id"]
     # TODO: See above how to get a Credentials instance
     credentials = UserPassCredentials(
@@ -22,10 +24,7 @@ def list_agents(rg_name, prefix):
     #    )
     #)
 
-    compute_client = ComputeManagementClient(
-            credentials,
-            subscription_id
-    )
+    compute_client = ComputeManagementClient(credentials, subscription_id)
 
     #network_client = NetworkManagementClient(NetworkManagementClientConfiguration(
     #        credentials,
@@ -33,16 +32,14 @@ def list_agents(rg_name, prefix):
     #    )
     #)
 
-    network_client = NetworkManagementClient(
-        credentials,
-        subscription_id
-    )
+    network_client = NetworkManagementClient(credentials, subscription_id)
 
     locators = []
 
     vms = compute_client.virtual_machines.list(rg_name)
     for vm in vms:
         vm_name = vm.name
+        print(vm_name)
         if prefix in vm_name:
             vm_ip = network_client.public_ip_addresses.get(rg_name, vm_name).ip_address
             vm_location = vm.location
