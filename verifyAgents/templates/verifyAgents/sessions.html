@@ -1,5 +1,11 @@
-{% if sessionType %}
-<h1>Show session information for {{ sessionType }} sessions</h1>
+{% if network_id %}
+    {% if sessionType %}
+        <h1>Show {{ sessionType }} sessions for network {{ network_id }} </h1>
+    {% endif %}
+{% else %}
+    {% if sessionType %}
+        <h1>Show all {{ sessionType }} sessions </h1>
+    {% endif %}
 {% endif %}
 {% if sessions %}
 <table style="width:100%">

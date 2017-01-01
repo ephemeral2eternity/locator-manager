@@ -1,8 +1,3 @@
-{% if network_id %}
-    {% if sessionType %}
-        <h1>Show {{ sessionType }} sessions for network {{ network_id }} </h1>
-    {% endif %}
-{% endif %}
 {% if session %}
 <ul>
     <li>Session: {{ session.src_ip }} <---> {{ session.dst_ip }}</li>
