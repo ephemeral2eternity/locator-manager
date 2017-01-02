@@ -96,8 +96,6 @@ def editNetwork(request):
                 existing_network.country = network_info['country']
                 existing_network.isVideoPath = (network_info['isVideo']=='True')
                 existing_network.save()
-                if existing_network.id != network.id:
-                    network.delete()
                 template = loader.get_template('verifyAgents/network.html')
                 return HttpResponse(template.render({'network':existing_network}, request))
             except:
