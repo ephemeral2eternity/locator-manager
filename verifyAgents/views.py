@@ -5,7 +5,7 @@ from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q, Count
 from .add_route import *
-from .models import VerifySession, NetworkForVerifySession
+from .models import VerifySession, NetworkVerifySessionsPair
 import json
 import urllib
 
@@ -108,6 +108,12 @@ def getSubnetwork(request):
         return HttpResponse(
         "You should use GET request http://manager/verify/get_subnetworks?src=src_ip&dst=dst_ip to get the subnetwork info for the session (src, dst)!")
 
+
+def showSubnetworks(request):
+    subnetworks = Subnetwork.objects.all()
+    template = loader.get_template('verifyAgents/subnetworks.html')
+    return HttpResponse(template.render({'subnetworks': subnetworks}, request))
+
 def getSession(request):
     url = request.get_full_path()
     if '?' in url:
@@ -167,25 +173,31 @@ def showVerifyNetworks(request):
     return HttpResponse(tempate.render({'networks':networks}, request))
 
 def initNetworksForVerifySessions(request):
-    NetworkForVerifySession.objects.all().delete()
-    verifySessionForVideoNetworks = Subnetwork.objects.filter(
-        Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
+    video_subnets = Subnetwork.objects.filter(Q(session__isVideoSession=False) & Q(network__isVideoPath=True))
 
+    K = 5
     ## Assign each verify session to a unique network
-    for subNtw in verifySessionForVideoNetworks:
+    for video_subnet in video_subnets:
         try:
-            curNetwork = NetworkForVerifySession.objects.get(network=subNtw.network)
+            network_verify_session_pair = NetworkVerifySessionsPair.objects.get(network=video_subnet.network)
+            if network_verify_session_pair.verify_sessions.count() >= K:
+                pass
+            else:
+                try:
+                    network_verify_session_pair.verify_sessions.get(video_subnet.session)
+                except:
+                    network_verify_session_pair.verify_sessions.add(video_subnet.session)
         except:
-            curNetwork = NetworkForVerifySession(network=subNtw.network)
-        curNetwork.save()
-        curNetwork.verify_sessions.add(subNtw.session)
-        print("Add session " + str(subNtw.session) + " to " + str(curNetwork))
-        curNetwork.save()
+            network_verify_session_pair = NetworkVerifySessionsPair(network=video_subnet.network)
+            network_verify_session_pair.verify_sessions.add(video_subnet.session)
+        print("Add session " + str(video_subnet.session) + " to " + str(network_verify_session_pair))
+        network_verify_session_pair.save()
     return showNetworksForVerifySessions(request)
 
 def shortenNetworksForVerifySessions(request):
-    K = 3
-    for cur_network in NetworkForVerifySession.objects.all():
+    K = 5
+    for cur_network in NetworkVerifySessionsPair.objects.all():
+        print("Shorten verify sessions for network " + str(cur_network))
         verify_sessions = cur_network.verify_sessions
         if verify_sessions.count() > K:
             sorted_sessions = verify_sessions.all().annotate(length=Count('route')).order_by('length')
@@ -198,20 +210,22 @@ def shortenNetworksForVerifySessions(request):
     return showNetworksForVerifySessions(request)
 
 def showNetworksForVerifySessions(request):
-    networks_for_verify_sessions = NetworkForVerifySession.objects.all()
+    networks_for_verify_sessions = NetworkVerifySessionsPair.objects.all()
     template = loader.get_template('verifyAgents/networks_for_verify_sessions.html')
     return HttpResponse(template.render({'network_sessions': networks_for_verify_sessions}, request))
 
 def initVerifySessionsForNetwork(request):
+    print("Deleting previous verify sessions!")
     VerifySession.objects.all().delete()
-    for subNtw in NetworkForVerifySession.objects.all():
-        for session in subNtw.verify_sessions.all():
+    for network_verify_session_pair in NetworkVerifySessionsPair.objects.all():
+        for session in network_verify_session_pair.verify_sessions.all():
+            print("Add " + str(session) + " from " + str(network_verify_session_pair.network))
             try:
                 cur_verify_session = VerifySession.objects.get(src_ip=session.src_ip, dst_ip=session.dst_ip, length=session.route.count())
             except:
                 cur_verify_session = VerifySession(src_ip=session.src_ip, dst_ip=session.dst_ip, length=session.route.count())
             cur_verify_session.save()
-            cur_verify_session.networks.add(subNtw.network)
+            cur_verify_session.networks.add(network_verify_session_pair.network)
             cur_verify_session.save()
     return showVerifySessionsForNetworks(request)
 

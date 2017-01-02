@@ -64,7 +64,7 @@ class VerifySession(models.Model):
     def __str__(self):
         return "Verification Session : " + self.src_ip + "<-->" + self.dst_ip + ",".join(ntw.id for ntw in self.networks.all())
 
-class NetworkForVerifySession(models.Model):
+class NetworkVerifySessionsPair(models.Model):
     network = models.ForeignKey(Network)
     verify_sessions = models.ManyToManyField(Session)
 

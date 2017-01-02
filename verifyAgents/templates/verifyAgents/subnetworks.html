@@ -14,6 +14,7 @@
 <table style="width:100%">
     <tr>
         <td>Network ID</td>
+        <td>Subnetwork Session</td>
         <td>Network Name</td>
         <td>Network Type</td>
         <td>Network AS Number</td>
@@ -23,6 +24,7 @@
     {% for subnetwork in subnetworks %}
         <tr>
         <td> {{ subnetwork.network.id }} </td>
+        <td> {{ subnetwork.session }} </td>
         <td> {{ subnetwork.network.name }} </td>
         <td> {{ subnetwork.network.type}} </td>
         <td> {{ subnetwork.network.ASNumber }} </td>
