@@ -138,6 +138,22 @@ def editNode(request):
     else:
         return HttpResponse("Wrong network id denoted!")
 
+@csrf_exempt
+@transaction.atomic
+def newNode(request):
+    if request.method == "POST":
+        node_info = request.POST.dict()
+        # print(node_info)
+        node = Node(name=node_info['name'], ip=node_info['ip'], type=node_info['type'],
+                    city=node_info['city'], region=node_info['region'], country=node_info['country'],
+                    AS=node_info['asn'], ISP=node_info['isp'],
+                    latitude=node_info['latitude'], longitude=node_info['longitude'])
+        node.save()
+        template = loader.get_template('nodeinfo/node.html')
+        return HttpResponse(template.render({'node': node}, request))
+    else:
+        template = loader.get_template('nodeinfo/new_node.html')
+        return HttpResponse(template.render)
 
 # Get the json info of a node by denoting its ip
 def getNode(request):

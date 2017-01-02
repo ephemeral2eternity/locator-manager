@@ -1,0 +1,24 @@
+<h1>Please fill in node details to add a new node</h1>
+<form action="/nodeinfo/new_node" method="post">
+    <label for="ip">Node IP:</label>
+    <input id="ip" type="text" name="type" value="x.x.x.x"> <br>
+    <label for="type">Node Type:</label>
+    <input id="type" type="text" name="type" value="client/server/router"> <br>
+    <label for="name">Node Name:</label>
+    <input id="name" type="text" name="name" value="hostname"> <br>
+    <label for="isp">ISP Name:</label>
+    <input id="isp" type="text" name="isp" value="ISP name"> <br>
+    <label for="asn">AS #:</label>
+    <input id="asn" type="number" name="asn" value="-1"> <br>
+    <label for="latitude">Latitude:</label>
+    <input id="latitude" type="number" step="any" name="latitude" value="0.000"> <br>
+    <label for="longitude">Longitude:</label>
+    <input id="longitude" type="number" step="any" name="longitude" value="0.000"> <br>
+    <label for="city">City:</label>
+    <input id="city" type="text" name="city" value=""> <br>
+    <label for="region">Region:</label>
+    <input id="region" type="text" name="region" value=""> <br>
+    <label for="country">Country:</label>
+    <input id="country" type="text" name="country" value=""> <br>
+    <input type="submit" value="Add New Node">
+</form>
