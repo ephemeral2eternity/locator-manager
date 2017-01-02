@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="043c5e8c-6db7-4fc8-a9f8-9f216e22ef8b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/edit_network.html" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/edit_network.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/views.py" afterPath="$PROJECT_DIR$/verifyAgents/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" />
     </list>
     <ignored path="mngLocator.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/verifyAgents/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="105" column="66" lean-forward="true" selection-start-line="105" selection-start-column="66" selection-end-line="105" selection-end-column="66" />
+            <state relative-caret-position="426">
+              <caret line="110" column="35" lean-forward="false" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="35" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -89,14 +87,14 @@
       <file leaf-file-name="network.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+            <state relative-caret-position="-183">
+              <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="networks.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="networks.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -154,11 +152,11 @@
         <option value="$PROJECT_DIR$/verifyAgents/models.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/subnetworks.html" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/session_network_pairs.html" />
-        <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" />
         <option value="$PROJECT_DIR$/verifyAgents/urls.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/edit_network.html" />
         <option value="$PROJECT_DIR$/verifyAgents/views.py" />
+        <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" />
       </list>
     </option>
   </component>
@@ -1092,22 +1090,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="83" lean-forward="true" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/edit_network.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -1134,11 +1116,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="105" column="66" lean-forward="true" selection-start-line="105" selection-start-column="66" selection-end-line="105" selection-end-column="66" />
+        <state relative-caret-position="426">
+          <caret line="110" column="35" lean-forward="false" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="35" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-183">
+          <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="83" lean-forward="true" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
+          <folding />
         </state>
       </provider>
     </entry>
