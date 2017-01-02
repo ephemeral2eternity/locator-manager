@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^show_verify_networks$', views.showVerifyNetworks, name='show_verify_networks'),
     url(r'^get_node', views.getNode, name='get_node'),
     url(r'^get_network', views.getNetwork, name='get_network'),
+    url(r'^edit_network', views.editNetwork, name='edit_network'),
     url(r'^get_route', views.getRoute, name='get_route'),
     url(r'^get_subnetworks', views.getSubnetwork, name='get_subnetworks'),
     url(r'^show_video_subnetworks', views.showVideoSubnetworks, name='show_video_subnetworks'),

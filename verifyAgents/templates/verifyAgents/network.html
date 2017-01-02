@@ -8,7 +8,9 @@
         <li>Network City: {{ network.city }} </li>
         <li>Network Region: {{ network.region }} </li>
         <li>Network Country: {{ network.country }} </li>
-        <br><br>
+        <br>
+        <p><a href="/verify/edit_network?id={{ network.id }}">Edit network {{ network.id }}</a></p>
+        <br>
         {% if network.nodes %}
             <li>Nodes in this network</li>
             <table style="width:100%" border="1">

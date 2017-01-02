@@ -70,6 +70,36 @@ def getNetwork(request):
     else:
         return HttpResponse('You need to use http://manager/verify/get_network?id=network_id to get the network info!')
 
+@csrf_exempt
+@transaction.atomic
+def editNetwork(request):
+    url = request.get_full_path()
+    params = url.split('?')[1]
+    request_dict = urllib.parse.parse_qs(params)
+    if ('id' in request_dict.keys()):
+        network_id = int(request_dict['id'][0])
+        network = Network.objects.get(id=network_id)
+        if request.method == "POST":
+            network_info = request.POST.dict()
+            # print(node_info)
+            network.type = network_info['type']
+            network.name = network_info['name']
+            network.ASNumber = int(network_info['asn'])
+            network.latitude = float(network_info['latitude'])
+            network.longitude = float(network_info['longitude'])
+            network.city = network_info['city']
+            network.region = network_info['region']
+            network.country = network_info['country']
+            network.save()
+            template = loader.get_template('verifyAgents/network.html')
+            return HttpResponse(template.render({'network':network}, request))
+        else:
+            template = loader.get_template('nodeinfo/edit_node.html')
+            return HttpResponse(template.render({'network':network}, request))
+    else:
+        return HttpResponse("Wrong network id denoted!")
+
+
 def getRoute(request):
     url = request.get_full_path()
     if '?' in url:
