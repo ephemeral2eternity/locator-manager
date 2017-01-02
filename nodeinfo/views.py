@@ -152,8 +152,7 @@ def newNode(request):
         template = loader.get_template('nodeinfo/node.html')
         return HttpResponse(template.render({'node': node}, request))
     else:
-        template = loader.get_template('nodeinfo/new_node.html')
-        return HttpResponse(template.render)
+        return render(request, 'nodeinfo/new_node.html')
 
 # Get the json info of a node by denoting its ip
 def getNode(request):
