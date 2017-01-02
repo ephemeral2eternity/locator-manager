@@ -91,14 +91,13 @@ def editNetwork(request):
             network.region = network_info['region']
             network.country = network_info['country']
             network.save()
-            template = loader.get_template('verifyAgents/network.html')
+            template = loader.get_template('verifyAgents/edit_network.html')
             return HttpResponse(template.render({'network':network}, request))
         else:
-            template = loader.get_template('nodeinfo/edit_node.html')
+            template = loader.get_template('verifyAgents/edit_network.html')
             return HttpResponse(template.render({'network':network}, request))
     else:
         return HttpResponse("Wrong network id denoted!")
-
 
 def getRoute(request):
     url = request.get_full_path()
