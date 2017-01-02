@@ -88,7 +88,7 @@ def editNetwork(request):
                 print("Merge the current network nodes to existing network" + str(existing_network))
                 for node in network.nodes.all():
                     if node not in existing_network.nodes.all():
-                        existing_network.nodes.all(node)
+                        existing_network.nodes.add(node)
                 existing_network.save()
                 network.delete()
             except:
