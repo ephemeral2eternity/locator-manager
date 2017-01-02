@@ -179,6 +179,7 @@ def initNetworksForVerifySessions(request):
             curNetwork = NetworkForVerifySession(network=subNtw.network)
         curNetwork.save()
         curNetwork.verify_sessions.add(subNtw.session)
+        print("Add session " + str(subNtw.session) + " to " + str(curNetwork))
         curNetwork.save()
     return showNetworksForVerifySessions(request)
 

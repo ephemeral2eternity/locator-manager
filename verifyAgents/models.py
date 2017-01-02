@@ -68,6 +68,9 @@ class NetworkForVerifySession(models.Model):
     network = models.ForeignKey(Network)
     verify_sessions = models.ManyToManyField(Session)
 
+    def __str__(self):
+        return str(self.network)
+
 # Define hop with its sequence on a client's route
 class Hop(models.Model):
     node = models.ForeignKey(Node, on_delete=models.CASCADE)
