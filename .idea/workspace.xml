@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="043c5e8c-6db7-4fc8-a9f8-9f216e22ef8b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/views.py" afterPath="$PROJECT_DIR$/verifyAgents/views.py" />
     </list>
     <ignored path="mngLocator.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/verifyAgents/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="110" column="35" lean-forward="false" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="35" />
+            <state relative-caret-position="273">
+              <caret line="101" column="50" lean-forward="false" selection-start-line="101" selection-start-column="50" selection-end-line="101" selection-end-column="50" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -94,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="networks.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="networks.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="83" lean-forward="true" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
+            <state relative-caret-position="238">
+              <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -155,8 +155,8 @@
         <option value="$PROJECT_DIR$/verifyAgents/urls.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/edit_network.html" />
-        <option value="$PROJECT_DIR$/verifyAgents/views.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html" />
+        <option value="$PROJECT_DIR$/verifyAgents/views.py" />
       </list>
     </option>
   </component>
@@ -1090,14 +1090,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/edit_network.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nodeinfo/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="625">
@@ -1114,16 +1106,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/verifyAgents/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="110" column="35" lean-forward="false" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/network.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-183">
@@ -1134,9 +1116,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/networks.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="83" lean-forward="true" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
+        <state relative-caret-position="238">
+          <caret line="14" column="31" lean-forward="true" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/edit_network.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/verifyAgents/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="101" column="50" lean-forward="false" selection-start-line="101" selection-start-column="50" selection-end-line="101" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
