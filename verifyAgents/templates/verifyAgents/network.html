@@ -12,6 +12,11 @@
         <br>
         <p><a href="/verify/edit_network?id={{ network.id }}">Edit network {{ network.id }}</a></p>
         <br>
+        {% if network.isVideoPath %}
+            <p><a href="/verify/show_video_networks">Return to Video Networks</a></p>
+        {% else %}
+            <p><a href="/verify/show_verify_networks">Return to Verify Networks</a></p>
+        {% endif %}
         {% if network.nodes %}
             <li>Nodes in this network</li>
             <table style="width:100%" border="1">
