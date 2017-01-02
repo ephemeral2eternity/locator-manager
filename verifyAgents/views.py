@@ -91,7 +91,7 @@ def editNetwork(request):
                         existing_network.nodes.add(node)
                 existing_network.save()
                 network.delete()
-                template = loader.get_template('verifyAgents/edit_network.html')
+                template = loader.get_template('verifyAgents/network.html')
                 return HttpResponse(template.render({'network':existing_network}, request))
             except:
                 network.type = network_info['type']
@@ -103,7 +103,7 @@ def editNetwork(request):
                 network.region = network_info['region']
                 network.country = network_info['country']
                 network.save()
-                template = loader.get_template('verifyAgents/edit_network.html')
+                template = loader.get_template('verifyAgents/network.html')
                 return HttpResponse(template.render({'network':network}, request))
         else:
             template = loader.get_template('verifyAgents/edit_network.html')
