@@ -82,15 +82,25 @@ def editNetwork(request):
         if request.method == "POST":
             network_info = request.POST.dict()
             # print(node_info)
-            network.type = network_info['type']
-            network.name = network_info['name']
-            network.ASNumber = int(network_info['asn'])
-            network.latitude = float(network_info['latitude'])
-            network.longitude = float(network_info['longitude'])
-            network.city = network_info['city']
-            network.region = network_info['region']
-            network.country = network_info['country']
-            network.save()
+            try:
+                existing_network = Network.objects.get(ASNumber=int(network_info['asn']), latitude=float(network_info['latitude']), longitude=float(network_info['longitude']))
+                print("Edited network exists!")
+                print("Merge the current network nodes to existing network" + str(existing_network))
+                for node in network.nodes.all():
+                    if node not in existing_network.nodes.all():
+                        existing_network.nodes.all(node)
+                existing_network.save()
+                network.delete()
+            except:
+                network.type = network_info['type']
+                network.name = network_info['name']
+                network.ASNumber = int(network_info['asn'])
+                network.latitude = float(network_info['latitude'])
+                network.longitude = float(network_info['longitude'])
+                network.city = network_info['city']
+                network.region = network_info['region']
+                network.country = network_info['country']
+                network.save()
             template = loader.get_template('verifyAgents/edit_network.html')
             return HttpResponse(template.render({'network':network}, request))
         else:
