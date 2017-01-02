@@ -19,6 +19,9 @@
         <input id="region" type="text" name="region" value="{{ network.region }}"> <br>
         <label for="country">Country:</label>
         <input id="country" type="text" name="country" value="{{ network.country }}"> <br>
+        <label for="isVideo">Video Network</label>
+        <input id="isVideo" type="radio" name="isVideo" value="True" checked> True <br>
+        <input id="isVideo" type="radio" name="isVideo" value="False"> False <br>
         <input type="submit" value="Submit">
     </form>
 {% else %}

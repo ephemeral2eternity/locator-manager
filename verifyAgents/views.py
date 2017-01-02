@@ -89,6 +89,12 @@ def editNetwork(request):
                 for node in network.nodes.all():
                     if node not in existing_network.nodes.all():
                         existing_network.nodes.add(node)
+                existing_network.type = network_info['type']
+                existing_network.name = network_info['name']
+                existing_network.city = network_info['city']
+                existing_network.region = network_info['region']
+                existing_network.country = network_info['country']
+                existing_network.isVideoPath = (network_info['isVideo']=='True')
                 existing_network.save()
                 network.delete()
                 template = loader.get_template('verifyAgents/network.html')
@@ -102,6 +108,7 @@ def editNetwork(request):
                 network.city = network_info['city']
                 network.region = network_info['region']
                 network.country = network_info['country']
+                network.isVideoPath = (network_info['isVideo'] == 'True')
                 network.save()
                 template = loader.get_template('verifyAgents/network.html')
                 return HttpResponse(template.render({'network':network}, request))
