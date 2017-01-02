@@ -1,0 +1,14 @@
+{% if subnetworks %}
+    <h1>There are totally {{ subnetworks.count }} <session, network> pairs for {{ type }} sessions</h1>
+<table style="width:100%">
+    <tr>
+        <td>Session</td>
+        <td>Network</td>
+    </tr>
+    {% for subnetwork in subnetworks %}
+        <tr>
+        <td> {{ subnetwork.session}} </td>
+        <td> {{ subnetwork.network }} </td>
+    {% endfor %}
+</table>
+{% endif %}
