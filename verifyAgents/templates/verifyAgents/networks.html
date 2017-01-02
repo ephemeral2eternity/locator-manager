@@ -14,7 +14,7 @@
         </tr>
         {% for network in networks %}
             <tr>
-                <td> {{ network.id}} </td>
+                <td><a href="/verify/get_network?id={{ network.id }}"> {{ network.id}} </a></td>
                 <td> {{ network.name}} </td>
                 <td> {{ network.type}} </td>
                 <td> ({{ network.latitude }}, {{ network.longitude }}) </td>
