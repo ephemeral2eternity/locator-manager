@@ -348,6 +348,7 @@ def getJsonNetworkGraph(request):
                 for net in session.route_networks.all():
                     if "network_" + str(net.id) not in nodes:
                         nodes.append("network_" + str(net.id))
+                        graph["nodes"].append({"name": net.name, "type": "network", "id": net.id})
                     curID = nodes.index("network_" + str(net.id))
                     if preID <= curID:
                         curEdge = {"source":preID, "target":curID}
