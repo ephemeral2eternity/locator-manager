@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^get_session', views.getSession, name='get_session'),
     url(r'^get_verify_session_by_src', views.getVerifySessionBySrc, name='get_verify_session_by_src'),
     url(r'^get_peers', views.getPeerAgents, name='get_peers'),
+    url(r'^get_net_graph_json', views.getJsonNetworkGraph, name='getJsonNetworkGraph'),
     url(r'^flush', views.flush, name='flush'),
 ]

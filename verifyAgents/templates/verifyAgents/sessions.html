@@ -8,23 +8,29 @@
     {% endif %}
 {% endif %}
 {% if sessions %}
-<table style="width:100%">
-    <tr>
-        <td>ID</td>
-        <td>Src IP</td>
-        <td>Dst IP</td>
-        <td>Route</td>
-        <td>Sub-networks</td>
-    </tr>
-    {% for session in sessions %}
+    <form action="/verify/get_net_graph_json" method="get">
+    <table style="width:100%">
         <tr>
-        <td> {{ session.id }} </td>
-        <td> {{ session.src_ip }} </td>
-        <td> {{ session.dst_ip }} </td>
-        <td><a href="/verify/get_route?src={{ session.src_ip }}&dst={{ session.dst_ip }}">Route Details</a></td>
-        <td><a href="/verify/get_subnetworks?src={{ session.src_ip }}&dst={{ session.dst_ip }}">Sub-networks' details</a></td>
-    {% endfor %}
-</table>
+            <td>Check Box</td>
+            <td>ID</td>
+            <td>Src IP</td>
+            <td>Dst IP</td>
+            <td>Route</td>
+            <td>Sub-networks</td>
+        </tr>
+        {% for session in sessions %}
+            <tr>
+                <td><input type="checkbox" name="id" value="{{ session.id }}"></td>
+                <td> {{ session.id }} </td>
+                <td> {{ session.src_ip }} </td>
+                <td> {{ session.dst_ip }} </td>
+                <td><a href="/verify/get_route?src={{ session.src_ip }}&dst={{ session.dst_ip }}">Route Details</a></td>
+                <td><a href="/verify/get_subnetworks?src={{ session.src_ip }}&dst={{ session.dst_ip }}">Sub-networks' details</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <input type="submit" value="Get network graph">
+    </form>
 {% else %}
     <p>No session's info are available.</p>
 {% endif %}
