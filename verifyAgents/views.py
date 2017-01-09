@@ -320,6 +320,7 @@ def showVerifySessions(request):
     template = loader.get_template('verifyAgents/sessions.html')
     return HttpResponse(template.render({'sessions': sessions, 'sessionType': "verify"}, request))
 
+@csrf_exempt
 def getJsonNetworkGraph(request):
     url = request.get_full_path()
     graph = {"links": [], "nodes": []}
