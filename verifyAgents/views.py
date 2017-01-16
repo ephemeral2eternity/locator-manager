@@ -1,15 +1,16 @@
-from django.shortcuts import render
-from django.template import RequestContext, loader
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from django.db import transaction
-from django.http import HttpResponse, JsonResponse
-from django.db.models import Q, Count
-from .add_route import *
-from .models import VerifySession, NetworkVerifySessionsPair
-from verifyAgents.utils import *
 import json
 import urllib
-import requests
+
+from django.db import transaction
+from django.db.models import Q, Count
+from django.http import HttpResponse, JsonResponse
+from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
+
+from nodeinfo.utils import *
+from .add_route import *
+from .models import VerifySession, NetworkVerifySessionsPair
+
 
 # Create your views here.
 def flush(request):
