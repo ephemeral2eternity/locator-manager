@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="043c5e8c-6db7-4fc8-a9f8-9f216e22ef8b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/netGraph.html" afterPath="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/netGraph.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locatemngm/settings.py" afterPath="$PROJECT_DIR$/locatemngm/settings.py" />
     </list>
     <ignored path="mngLocator.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,6 +52,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/locatemngm/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="469">
+              <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mngLocator/urls.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -63,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="netGraph.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="netGraph.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/verifyAgents/templates/verifyAgents/netGraph.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -149,7 +158,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/client/urls.py" />
-        <option value="$PROJECT_DIR$/locatemngm/settings.py" />
         <option value="$PROJECT_DIR$/nodeinfo/templates/nodeinfo/nodes.html" />
         <option value="$PROJECT_DIR$/nodeinfo/templates/nodeinfo/node.html" />
         <option value="$PROJECT_DIR$/nodeinfo/models.py" />
@@ -181,6 +189,7 @@
         <option value="$PROJECT_DIR$/verifyAgents/urls.py" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/sessions.html" />
         <option value="$PROJECT_DIR$/verifyAgents/templates/verifyAgents/netGraph.html" />
+        <option value="$PROJECT_DIR$/locatemngm/settings.py" />
       </list>
     </option>
   </component>
@@ -233,57 +242,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="verifyAgents" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mngLocator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mngLocator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="verifyAgents" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="verifyAgents" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mngLocator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mngLocator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeinfo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mngLocator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mngLocator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mngLocator" />
+              <option name="myItemId" value="locatemngm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -301,17 +260,17 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/verifyAgents/templates/verifyAgents" />
-      <recent name="$PROJECT_DIR$/nodeinfo" />
-      <recent name="D:\GitHub\mngLocator\verifyAgents\templates\verifyAgents" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/verifyAgents/templates" />
       <recent name="D:\GitHub\mngLocator\nodeinfo\templates\nodeinfo" />
       <recent name="D:\GitHub\mngLocator\verifyAgents\templates\verifyAgents" />
       <recent name="D:\GitHub\mngLocator\verifyAgents\templates" />
-      <recent name="D:\GitHub\mngLocator\verifyAgents" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/verifyAgents/templates/verifyAgents" />
+      <recent name="$PROJECT_DIR$/nodeinfo" />
+      <recent name="D:\GitHub\mngLocator\verifyAgents\templates\verifyAgents" />
     </key>
   </component>
   <component name="RunManager" selected="Django server.mngLocator">
@@ -644,7 +603,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1440" y="23" width="1440" height="877" extended-state="6" />
+    <frame x="1440" y="23" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1502146" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -970,14 +929,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/locatemngm/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="108" column="0" lean-forward="false" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/verifyAgents/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1049,6 +1000,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/locatemngm/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding />
         </state>
       </provider>
