@@ -423,7 +423,7 @@ def getNetworkGraph(request):
         for session in sessions:
             ids.append(session.id)
         ids_json = json.dumps(ids)
-        template = loader.get_template("anomalyDiagnosis/netGraph.html")
+        template = loader.get_template("verifyAgents/netGraph.html")
         return HttpResponse(template.render({'ids': ids_json}, request))
 
 
