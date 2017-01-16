@@ -408,7 +408,23 @@ def getJsonNetworkGraph(request):
     else:
         return HttpResponse("Please select the checkboxes in the url: http://manage.cmu-agens.com/verify/show_sessions")
 
-
+def getNetworkGraph(request):
+    url = request.get_full_path()
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        ids = request_dict['id']
+        ids_json = json.dumps(ids)
+        template = loader.get_template("verifyAgents/netGraph.html")
+        return HttpResponse(template.render({'ids': ids_json}, request))
+    else:
+        sessions = Session.objects.all()
+        ids = []
+        for session in sessions:
+            ids.append(session.id)
+        ids_json = json.dumps(ids)
+        template = loader.get_template("anomalyDiagnosis/netGraph.html")
+        return HttpResponse(template.render({'ids': ids_json}, request))
 
 
 
