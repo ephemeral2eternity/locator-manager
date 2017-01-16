@@ -6,8 +6,10 @@ from django.http import HttpResponse, JsonResponse
 from django.db.models import Q, Count
 from .add_route import *
 from .models import VerifySession, NetworkVerifySessionsPair
+from verifyAgents.utils import *
 import json
 import urllib
+import requests
 
 # Create your views here.
 def flush(request):
@@ -53,6 +55,38 @@ def getNode(request):
             return HttpResponse("Please use http://manager/verify/get_node?ip=node_ip to get the node info!")
     else:
         return HttpResponse("Please use http://manager/verify/get_node?ip=node_ip to get the node info!")
+
+def getNodeJson(request):
+    url = request.get_full_path()
+    node_ip = request.META['REMOTE_ADDR']
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        if ('ip' in request_dict.keys()):
+            node_ip = request_dict['ip'][0]
+    try:
+        node = Node.objects.get(ip=node_ip)
+        node_network = Network.objects.get(id=node.id)
+    except:
+        node_info = get_ipinfo(node_ip)
+
+        try:
+            node_network = Network.objects.get(ASNumber=node_info["AS"], latitude=node_info["latitude"], longitude=node_info["longitude"])
+        except:
+            node_network = Network(name=node_info["ISP"], ASNumber=node_info["AS"],
+                                   latitude=node_info["latitude"], longitude=node_info["longitude"],
+                                   city=node_info["city"], region=node_info["region"], country=node_info["country"])
+            node_network.save()
+
+        node = Node(name=node_info["hostname"], ip=node_info["ip"], network_id=node_network.id)
+        node.save()
+
+    node_dict = {"name": node.name, "ip": node.ip,
+                 "latitude": node_network.latitude, "longitude": node_network.longitude,
+                 "AS": node_network.ASNumber, "ISP": node_network.name,
+                 "city": node_network.city, "region": node_network.region, "country": node_network.country}
+
+    return JsonResponse(node_dict)
 
 def getNetwork(request):
     url = request.get_full_path()
