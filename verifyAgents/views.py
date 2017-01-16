@@ -52,6 +52,11 @@ def getNode(request):
             node = Node.objects.get(ip=node_ip)
             template = loader.get_template('verifyAgents/node.html')
             return HttpResponse(template.render({'node': node}, request))
+        elif ('id' in request_dict.keys()):
+            node_id = request_dict['id'][0]
+            node = Node.objects.get(id=node_id)
+            template = loader.get_template('verifyAgents/node.html')
+            return HttpResponse(template.render({'node': node}, request))
         else:
             return HttpResponse("Please use http://manager/verify/get_node?ip=node_ip to get the node info!")
     else:
