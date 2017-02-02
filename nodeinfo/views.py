@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db import transaction
 from django.template import RequestContext, loader
 from nodeinfo.models import Node, Edge, Network
+from nodeinfo.utils import *
 import urllib
 import json
 
@@ -169,18 +170,22 @@ def getNode(request):
     node_dict = {}
     try:
         node = Node.objects.get(ip=ip)
-        node_dict['name'] = node.name
-        node_dict['ip'] = node.ip
-        node_dict['type'] = node.type
-        node_dict['city'] = node.city
-        node_dict['region'] = node.region
-        node_dict['country'] = node.country
-        node_dict['AS'] = node.AS
-        node_dict['ISP'] = node.ISP
-        node_dict['latitude'] = node.latitude
-        node_dict['longitude'] = node.longitude
     except:
-        print("No node with ip = " + ip)
+        node_info = get_ipinfo(ip)
+        node = Node(ip=ip, name=node_info['hostname'], AS=node_info["AS"], ISP=node_info["ISP"],
+                    latitude=node_info["latitude"], longitude=node_info["longitude"],
+                    city=node_info["city"], region=node_info["region"], country=node_info["country"])
+        node.save()
+    node_dict['name'] = node.name
+    node_dict['ip'] = node.ip
+    node_dict['type'] = node.type
+    node_dict['city'] = node.city
+    node_dict['region'] = node.region
+    node_dict['country'] = node.country
+    node_dict['AS'] = node.AS
+    node_dict['ISP'] = node.ISP
+    node_dict['latitude'] = node.latitude
+    node_dict['longitude'] = node.longitude
     rsp = JsonResponse(node_dict, safe=False)
     rsp["Access-Control-Allow-Origin"] = "*"
     return rsp

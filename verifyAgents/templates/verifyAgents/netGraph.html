@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+{% if ids %}
+<head>
+    <title>Network | Basic usage</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
+    <link href="http://visjs.org/dist/vis.min.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body onload="draw()">
+{% load staticfiles %}
+<p>
+    Create a simple network with some nodes and edges.
+</p>
+
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    var nodes = null;
+    var edges = null;
+    var network = null;
+
+    var EDGE_LENGTH_MAIN = 50;
+    var EDGE_LENGTH_SUB = 50;
+
+    // Called when the Visualization API is loaded.
+    function draw() {
+        // Create a data table with nodes.
+        var ids = {{ ids|safe }};
+        var url = "/verify/get_net_graph_json?";
+        var idsNum = ids.length;
+        for (var i=0; i<idsNum - 1; i++) {
+            url = url + "id=" + ids[i] + "&";
+        }
+        url = url + "id=" + ids[idsNum - 1];
+        console.log(url);
+
+        $.getJSON(url, function (json) {
+            var org_nodes = json['nodes'];
+            var nodes = [];
+
+            // Create a data table with links.
+            var links = json['links'];
+            var edges = [];
+
+            var nodeNumber = org_nodes.length;
+            for (var i = 0; i < nodeNumber; i++) {
+                nodes.push({
+                    id: i,
+                    // label: org_nodes[i]['name'],
+                    type: org_nodes[i]['type'],
+                    cid: org_nodes[i]['id'],
+                    image: "/static/" + org_nodes[i]['type'] + ".png",
+                    shape: 'image'
+                });
+            }
+
+            var edgeNumber = links.length;
+            for (var j = 0; j < edgeNumber; j++) {
+                edges.push({from: links[j]['source'], to: links[j]['target'], length: EDGE_LENGTH_SUB})
+            }
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {
+                layout: {
+                    hierarchical: {
+                        direction: "RL"
+                    }
+                }
+            };
+            network = new vis.Network(container, data, options);
+
+            network.on('selectNode', function (params) {
+                console.log(params);
+                var nodeID = params['nodes'][0];
+                console.log(nodeID);
+                var node = nodes[nodeID];
+                console.log(node);
+                var url = "/verify/";
+                console.log(url);
+                document.location.href=url + "get_" + node['type'] + "?id=" + node['cid'];
+            });
+        });
+    }
+</script>
+</body>
+{% endif %}
+</html>
