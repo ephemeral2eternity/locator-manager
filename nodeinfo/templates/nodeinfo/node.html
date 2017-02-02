@@ -5,10 +5,10 @@
         <li>Node IP: {{ node.ip }}</li>
         <li>Node ISP: {{ node.ISP }}</li>
         <li>Node AS: {{ node.AS }}</li>
-        <li>Node location: ({{ node.latitude }}, {{ node.longitude }})</li>
-        <li>Node City: {{ node.city }}</li>
-        <li>Node City: {{ node.region }}</li>
-        <li>Node City: {{ node.country }}</li>
+        <li>Location: ({{ node.latitude }}, {{ node.longitude }})</li>
+        <li>City: {{ node.city }}</li>
+        <li>Region: {{ node.region }}</li>
+        <li>Country: {{ node.country }}</li>
     </ul>
 {% else %}
     <p>No node is with id {{ node.id }}.</p>
