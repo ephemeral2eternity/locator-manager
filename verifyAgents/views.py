@@ -47,6 +47,17 @@ def showNodes(request):
     template = loader.get_template('verifyAgents/nodes.html')
     return HttpResponse(template.render({'nodes': nodes}, request))
 
+def deleteNode(request):
+    url = request.get_full_path()
+    if '?' in url:
+        params = url.split('?')[1]
+        request_dict = urllib.parse.parse_qs(params)
+        if ('id' in request_dict.keys()):
+            node_id = request_dict['id'][0]
+            node = Node.objects.get(id=node_id)
+            node.delete()
+    return showNodes(request)
+
 def getNode(request):
     url = request.get_full_path()
     if '?' in url:

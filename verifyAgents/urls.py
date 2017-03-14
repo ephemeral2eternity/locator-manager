@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^show_verify_networks$', views.showVerifyNetworks, name='show_verify_networks'),
     url(r'^show_nodes$', views.showNodes, name='show_nodes'),
     url(r'^get_node$', views.getNode, name='get_node'),
+    url(r'^delete_node$', views.deleteNode, name='delete_node$'),
     url(r'^get_client$', views.getNode, name='get_node'),
     url(r'^get_server$', views.getNode, name='get_node'),
     url(r'^get_node_json$', views.getNodeJson, name='get_node_json'),
