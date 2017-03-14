@@ -2,6 +2,17 @@
     {% if sessionType %}
         <h1>Show {{ sessionType }} sessions for network {{ network_id }} </h1>
     {% endif %}
+    {% if network %}
+        <ul>
+            <li>Network Name: {{ network.name }}</li>
+            <li>Network Type: {{ network.type }}</li>
+            <li>Network AS Number: {{ network.ASNumber }}</li>
+            <li>Network Location: ({{ network.latitude }}, {{ network.longitude }})</li>
+            <li>Network City: {{ network.city }} </li>
+            <li>Network Region: {{ network.region }} </li>
+            <li>Network Country: {{ network.country }} </li>
+        </ul>
+    {% endif %}
 {% else %}
     {% if sessionType %}
         <h1>Show all {{ sessionType }} sessions </h1>
