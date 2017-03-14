@@ -42,6 +42,11 @@ def addAgentPath(request):
     else:
         return HttpResponse("You should use POST method!")
 
+def showNodes(request):
+    nodes = Node.objects.all()
+    template = loader.get_template('verifyAgents/nodes.html')
+    return HttpResponse(template.render({'nodes': nodes}, request))
+
 def getNode(request):
     url = request.get_full_path()
     if '?' in url:

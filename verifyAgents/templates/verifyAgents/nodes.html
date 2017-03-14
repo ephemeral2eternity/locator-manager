@@ -1,0 +1,25 @@
+{% if nodes %}
+    <form action="/verify/delete_node" method="get">
+        <table style="width:100%">
+            <tr>
+                <td>Check Box</td>
+                <td>ID</td>
+                <td>Name</td>
+                <td>IP</td>
+                <td>Type</td>
+                <td>Timestamp</td>
+            </tr>
+            {% for session in sessions %}
+                <tr>
+                    <td><input type="checkbox" name="id" value="{{ node.id }}"></td>
+                    <td> {{ node.id }} </td>
+                    <td> {{ node.name }} </td>
+                    <td> {{ node.ip }} </td>
+                    <td> {{ node.type }} </td>
+                    <td> {{ node.latest_check }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Delete selected node">
+    </form>
+{% endif %}

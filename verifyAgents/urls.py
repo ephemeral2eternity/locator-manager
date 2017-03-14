@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^get_video_session_per_network', views.getVideoSessionsPerNetwork, name='get_video_session_per_network'),
     url(r'^get_verify_session_per_network', views.getVerifySessionsPerNetwork, name='get_verify_session_per_network'),
     url(r'^show_verify_networks$', views.showVerifyNetworks, name='show_verify_networks'),
+    url(r'^show_nodes$', views.showNodes, name='show_nodes'),
     url(r'^get_node$', views.getNode, name='get_node'),
     url(r'^get_client$', views.getNode, name='get_node'),
     url(r'^get_server$', views.getNode, name='get_node'),
