@@ -53,9 +53,10 @@ def deleteNode(request):
         params = url.split('?')[1]
         request_dict = urllib.parse.parse_qs(params)
         if ('id' in request_dict.keys()):
-            node_id = request_dict['id'][0]
-            node = Node.objects.get(id=node_id)
-            node.delete()
+            node_ids = request_dict['id']
+            for node_id in node_ids:
+                node = Node.objects.get(id=node_id)
+                node.delete()
     return showNodes(request)
 
 def getNode(request):
