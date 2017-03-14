@@ -251,9 +251,18 @@ def getVerifySessionsPerNetwork(request):
         request_dict = urllib.parse.parse_qs(params)
         if ('id' in request_dict.keys()):
             network_id = request_dict['id'][0]
+            sessions = []
             verify_sessions = VerifySession.objects.filter(networks__id=network_id)
+            for v_session in verify_sessions.all():
+                src_ip = v_session.src_ip
+                dst_ip = v_session.dst_ip
+                try:
+                    session = Session.objects.get(src_ip=src_ip, dst_ip=dst_ip)
+                    sessions.append(session)
+                except:
+                    print(str(verify_sessions) + " does not exist in Session!")
             template = loader.get_template('verifyAgents/sessions.html')
-            return HttpResponse(template.render({'network_id': network_id, 'sessions': verify_sessions, 'sessionType': "verify"}, request))
+            return HttpResponse(template.render({'network_id': network_id, 'sessions': sessions, 'sessionType': "verify"}, request))
         else:
             return HttpResponse("Please give the network id !")
     else:
