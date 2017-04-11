@@ -4,3 +4,14 @@ db.sqlite3
 */__pycache__/*.pyc
 agens/__pycache__/*
 */*/*.json
+.idea/dataSources/6cf79b76-e3e6-4227-bebd-3eaf302bf673/_src_/
+.idea/dataSources/6cf79b76-e3e6-4227-bebd-3eaf302bf673/_staging_/
+client/__pycache__/
+client/migrations/
+locatemngm/__pycache__/
+mngLocator/__pycache__/
+mngLocator/migrations/
+nodeinfo/__pycache__/
+nodeinfo/migrations/
+verifyAgents/__pycache__/
+verifyAgents/migrations/
