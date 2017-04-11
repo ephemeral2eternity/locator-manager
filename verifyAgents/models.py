@@ -2,7 +2,7 @@ from django.db import models
 
 # Node defines a node reported by a pair of verification agents or a video session
 class Node(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=500)
     ip = models.CharField(max_length=100)
     network_id = models.IntegerField(default=-1)
     type = models.CharField(max_length=100, default="unknown")
@@ -25,7 +25,7 @@ class Edge(models.Model):
 # Network defines a network that several routers in an end-to-end delivery path belongs to
 class Network(models.Model):
     type = models.CharField(max_length=100, default="unknown")
-    name = models.CharField(max_length=100, default="")
+    name = models.CharField(max_length=500, default="")
     latitude = models.DecimalField(max_digits=10, decimal_places=4, default=0.0)
     longitude = models.DecimalField(max_digits=10, decimal_places=4, default=0.0)
     ASNumber = models.IntegerField(default=-1)

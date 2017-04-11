@@ -139,6 +139,19 @@ def editNode(request):
     else:
         return HttpResponse("Wrong network id denoted!")
 
+## Delete a specific node denoted by the id
+def delNode(request):
+    url = request.get_full_path()
+    params = url.split('?')[1]
+    request_dict = urllib.parse.parse_qs(params)
+    if ('id' in request_dict.keys()):
+        node_id = int(request_dict['id'][0])
+        node = Node.objects.get(id=node_id)
+        node.delete()
+        return showNodes(request)
+    else:
+        return HttpResponse("Please specify the node_id to delete the node in http://manager/del_node?id=node_id")
+
 @csrf_exempt
 @transaction.atomic
 def newNode(request):
