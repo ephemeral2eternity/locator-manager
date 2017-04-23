@@ -87,7 +87,7 @@ def initNetworks(request):
 @transaction.atomic
 def addNode(request):
     if request.method == "POST":
-        node_info = json.loads(request.body.decode("utf-8"))
+        node_info = json.loads(request.body)
         print(node_info)
         try:
             node = Node.objects.get(ip=node_info['ip'])
