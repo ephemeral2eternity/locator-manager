@@ -11,6 +11,7 @@ client/migrations/
 locatemngm/__pycache__/
 mngLocator/__pycache__/
 mngLocator/migrations/
+mngLocator/info.json
 nodeinfo/__pycache__/
 nodeinfo/migrations/
 verifyAgents/__pycache__/

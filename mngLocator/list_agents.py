@@ -7,10 +7,10 @@ import json
 import os
 
 def list_agents(rg_name, prefix):
-    info_dict = json.load(open(os.path.dirname(__file__) + "/info.json"))
-    location_dict = json.load(open(os.path.dirname(__file__) + "/locations.json"))
-    # info_dict = json.load(open(os.getcwd() + "/info.json"))
-    # location_dict = json.load(open(os.getcwd() + "/locations.json"))
+    # info_dict = json.load(open(os.path.dirname(__file__) + "/info.json"))
+    # location_dict = json.load(open(os.path.dirname(__file__) + "/locations.json"))
+    info_dict = json.load(open(os.getcwd() + "/info.json"))
+    location_dict = json.load(open(os.getcwd() + "/locations.json"))
     subscription_id = info_dict["subscription_id"]
     # TODO: See above how to get a Credentials instance
     credentials = UserPassCredentials(
@@ -41,7 +41,7 @@ def list_agents(rg_name, prefix):
         vm_name = vm.name
         print(vm_name)
         if prefix in vm_name:
-            vm_ip = network_client.public_ip_addresses.get(rg_name, vm_name).ip_address
+            vm_ip = network_client.public_ip_addresses.get(rg_name, vm_name + "-ip").ip_address
             vm_location = vm.location
             vm_coordinates = location_dict[vm_location]
             # print vm_name, vm_ip, vm_location
