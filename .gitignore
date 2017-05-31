@@ -4,6 +4,7 @@ db.sqlite3
 */__pycache__/*.pyc
 agens/__pycache__/*
 */*/*.json
+*/*.json
 .idea/dataSources/6cf79b76-e3e6-4227-bebd-3eaf302bf673/_src_/
 .idea/dataSources/6cf79b76-e3e6-4227-bebd-3eaf302bf673/_staging_/
 client/__pycache__/
