@@ -41,7 +41,10 @@ def list_agents(rg_name, prefix):
         vm_name = vm.name
         print(vm_name)
         if prefix in vm_name:
-            vm_ip = network_client.public_ip_addresses.get(rg_name, vm_name + "-ip").ip_address
+            try:
+                 vm_ip = network_client.public_ip_addresses.get(rg_name, vm_name + "-ip").ip_address
+            except:
+                 vm_ip = network_client.public_ip_addresses.get(rg_name, vm_name).ip_address
             vm_location = vm.location
             vm_coordinates = location_dict[vm_location]
             # print vm_name, vm_ip, vm_location
