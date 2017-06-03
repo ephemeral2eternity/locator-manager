@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from .models import Locator, Cache
-from client.models import GeoConnected
+from client.models import GeoConnected, NetConnected
 from .list_agents import *
 
 # Create your views here.
@@ -67,6 +67,12 @@ def getJsonData(request):
 	rsp = JsonResponse(data, safe=False)
 	rsp["Access-Control-Allow-Origin"] = "*"
 	return rsp
+
+
+def clearAll(request):
+	GeoConnected.objects.all().delete()
+	NetConnected.objects.all().delete()
+	return index(request)
 
 
 def getCloudAgents(request):
