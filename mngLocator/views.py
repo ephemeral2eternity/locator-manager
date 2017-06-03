@@ -17,6 +17,8 @@ def index(request):
 
 def init(request):
 	Locator.objects.all().delete()
+	GeoConnected.objects.all().delete()
+	NetConnected.objects.all().delete()
 	locators = list_agents("agens", "locator-")
 	for locator in locators:
 		new_locator = Locator(name=locator['name'], ip=locator['ip'], location=locator['location'], latitude=locator['latitude'], longitude=locator['longitude'])

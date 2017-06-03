@@ -73,11 +73,6 @@ def queryNet(request):
 	template = loader.get_template('client/clients.html')
 	return HttpResponse(template.render({'method' : method, 'clients' : clients, 'locator' : "ALL"}))
 
-def clearAll(request):
-	GeoConnected.objects.all().delete()
-	NetConnected.objects.all().delete()
-	return queryGeo(request)
-
 def get(request):
 	url = request.get_full_path()
 	params = url.split('?')[1]
