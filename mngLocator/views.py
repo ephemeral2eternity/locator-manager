@@ -69,12 +69,6 @@ def getJsonData(request):
 	return rsp
 
 
-def clearAll(request):
-	GeoConnected.objects.all().delete()
-	NetConnected.objects.all().delete()
-	return index(request)
-
-
 def getCloudAgents(request):
 	data = {}
 	locators = Locator.objects.all()
