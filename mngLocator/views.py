@@ -19,13 +19,13 @@ def init(request):
 	Locator.objects.all().delete()
 	GeoConnected.objects.all().delete()
 	NetConnected.objects.all().delete()
-	locators = list_agents("agens", "locator-")
+	locators = aws_list_agents()
 	for locator in locators:
 		new_locator = Locator(name=locator['name'], ip=locator['ip'], location=locator['location'], latitude=locator['latitude'], longitude=locator['longitude'])
 		new_locator.save()
 
 	Cache.objects.all().delete()
-	caches = list_agents("cache", "cache-")
+	caches = aws_list_agents()
 	for cache in caches:
 		new_cache = Cache(name=cache['name'], ip=cache['ip'], location=cache['location'], latitude=cache['latitude'], longitude=cache['longitude'])
 		new_cache.save()
