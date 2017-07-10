@@ -25,7 +25,7 @@ def init(request):
 		new_locator.save()
 
 	Cache.objects.all().delete()
-	caches = aws_list_agents()
+	caches = azure_list_agents("QRank", "cache-")
 	for cache in caches:
 		new_cache = Cache(name=cache['name'], ip=cache['ip'], location=cache['location'], latitude=cache['latitude'], longitude=cache['longitude'])
 		new_cache.save()
